@@ -11,8 +11,10 @@
   </section>
 
   <section class="content">
+    <div class="row">
+    <div class="col-md-12">
     <div class="box box-primary">
-    <div class="box-header">
+    <div class="box-header with-border">
       <h3 class="box-title">Data Simpanan</h3>
     <div class="pull-right">
       <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>Tambah</button>
@@ -55,6 +57,8 @@
         </table>
       </div>
     </div>
+  </div>
+  </div>
   </section>
 </div>
 
@@ -86,10 +90,10 @@
           </select>
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label>Besar Simpanan</label>
           <input type="text" name="besar_simpanan" class="form-control" readonly="">
-        </div>
+        </div> -->
 
         <div class="form-group">
           <label>Nama Anggota</label>
@@ -118,6 +122,4 @@
       </div>
     </div>
   </div>
-</div>
-
 </div>

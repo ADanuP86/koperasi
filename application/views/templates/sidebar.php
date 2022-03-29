@@ -4,7 +4,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url() ?>assets/img/Logo.png" class="img-circle" alt="User Image">
+          <img src="<?php echo base_url() ?>assets/img/Logo Koperasi.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Admin</p>
@@ -88,8 +88,5 @@
       </li>
     </ul>
   </section>
-
-
 <!-- /.sidebar -->
 </aside>
-</div>

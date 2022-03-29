@@ -7,6 +7,7 @@ class C_Login extends CI_Controller {
         parent::__construct();
         $this->load->model('M_Login');
         $this->load->model('M_Anggota');
+        $this->load->model('M_Beranda');
     }
 
     public function index() {
@@ -14,6 +15,7 @@ class C_Login extends CI_Controller {
             $this->load->view('V_Login');
         }
         else {
+        $data['count'] = $this->M_Beranda->get_all_count();
         $data['koperasi'] = $this->M_Anggota->tampil_data()->result();
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');

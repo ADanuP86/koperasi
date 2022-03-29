@@ -1,38 +1,40 @@
 <div class="content-wrapper">
   <section class="content-header">
-      <h1>Anggota
-        <small>Data Anggota</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo base_url('C_Beranda/index') ?>"><i class="fa fa-dashboard"></i> Beranda</a></li>
-        <li class="active">Anggota</li>
-      </ol>
-  </section>
+    <h1>Anggota
+      <small>Data Anggota</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="<?php echo base_url('C_Beranda/index') ?>"><i class="fa fa-dashboard"></i>Beranda</a></li>
+      <li class="active">Anggota</li>
+    </ol>
+    </section>
 
-  <section class="content">
-    <div class="box box-primary">
-    <div class="box-header">
-      <h3 class="box-title">Data Anggota</h3>
-    <div class="pull-right">
+    <section class="content">
+      <div class="row">
+      <div class="col-md-12">
+      <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Data Anggota</h3>
+      <div class="pull-right">
       <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>Tambah</button>
-    </div>
-    </div>
-    
+      </div>
+      </div>
+
     <div class="box-body table-responsive">
-      <table id="tabel-data" class="table table-bordered table-striped">
+      <table class="table table-bordered table-striped" id="tabel-data">
         <thead>
         <tr>
-          <th scope="col" class="text-center">No</th>
-          <th scope="col" class="text-center">Nama</th>
-          <th scope="col" class="text-center">NIK</th>
-          <th scope="col" class="text-center">Tanggal Lahir</th>
-          <th scope="col" class="text-center">Tempat Lahir</th>
-          <th scope="col" class="text-center">Pekerjaan</th>
-          <th scope="col" class="text-center">Jenis Kelamin</th>
-          <th scope="col" class="text-center">No.Telpon</th>
-          <th scope="col" class="text-center">Tanggal Masuk</th>
-          <th scope="col" class="text-center">Status</th>
-          <th scope="col" class="text-center">Aksi</th>
+          <th>No</th>
+          <th>Nama</th>
+          <th>NIK</th>
+          <th>Tanggal Lahir</th>
+          <th>Tempat Lahir</th>
+          <th>Pekerjaan</th>
+          <th>Jenis Kelamin</th>
+          <th>No.Telpon</th>
+          <th>Tanggal Masuk</th>
+          <th>Status</th>
+          <th>Aksi</th>
         </tr>
         </thead>
 
@@ -61,8 +63,11 @@
         </tbody>
       </table>
     </div>
-  </div>
-</section>
+
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <!-- Modal -->
@@ -138,6 +143,4 @@
       </div>
     </div>
   </div>
-</div>
-
 </div>

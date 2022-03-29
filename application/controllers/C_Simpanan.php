@@ -20,27 +20,17 @@ class C_Simpanan extends CI_Controller {
 	}
 
 	public function tambah_simpanan() {
+		$id_simpanan = $this->input->post('id_simpanan');
+		$tgl_simpan = $this->input->post('tgl_simpan');
+		$id_jesim = $this->input->post('id_jesim');
 		$id_anggota = $this->input->post('id_anggota');
-		$nama = $this->input->post('nama');
-		$nik = $this->input->post('nik');
-		$tgl_lahir = $this->input->post('tgl_lahir');
-		$tempat_lahir = $this->input->post('tempat_lahir');
-		$pekerjaan = $this->input->post('pekerjaan');
-		$jenis_kelamin = $this->input->post('jenis_kelamin');
-		$no_telpon = $this->input->post('no_telpon');
-		$tgl_masuk = $this->input->post('tgl_masuk');
-		$status = $this->input->post('status');
+		$id_admin = $this->input->post('id_admin');
 
 		$data = array(
-			'nama' => $nama,
-			'nik' => $nik,
-			'tgl_lahir' => $tgl_lahir,
-			'tempat_lahir' => $tempat_lahir,
-			'pekerjaan' => $pekerjaan,
-			'jenis_kelamin' => $jenis_kelamin,
-			'no_telpon' => $no_telpon,
-			'tgl_masuk' => $tgl_masuk,
-			'status' => $status
+			'tgl_simpan' => $tgl_simpan,
+			'id_jesim' => $id_jesim,
+			'id_anggota' => $id_anggota,
+			'id_admin' => $id_admin
 		);
 
 		$this->M_Simpanan->input_data($data, 'simpanan');
@@ -54,6 +44,9 @@ class C_Simpanan extends CI_Controller {
 	}
 
 	public function edit($id_simpanan) {
+		$data['jenis'] = $this->M_Simpanan->get('jenis_simpanan');
+		$data['anggota'] = $this->M_Simpanan->get('anggota');
+		$data['admin'] = $this->M_Simpanan->get('admin');
 		$where = array('id_simpanan' => $id_simpanan);
 		$data['koperasi'] = $this->M_Simpanan->edit_data($where, 'simpanan')->result();
 		$this->load->view('templates/header');
@@ -63,27 +56,17 @@ class C_Simpanan extends CI_Controller {
 	}
 
 	public function update() {
+		$id_simpanan = $this->input->post('id_simpanan');
+		$tgl_simpan = $this->input->post('tgl_simpan');
+		$id_jesim = $this->input->post('id_jesim');
 		$id_anggota = $this->input->post('id_anggota');
-		$nama = $this->input->post('nama');
-		$nik = $this->input->post('nik');
-		$tgl_lahir = $this->input->post('tgl_lahir');
-		$tempat_lahir = $this->input->post('tempat_lahir');
-		$pekerjaan = $this->input->post('pekerjaan');
-		$jenis_kelamin = $this->input->post('jenis_kelamin');
-		$no_telpon = $this->input->post('no_telpon');
-		$tgl_masuk = $this->input->post('tgl_masuk');
-		$status = $this->input->post('status');
+		$id_admin = $this->input->post('id_admin');
 
 		$data = array(
-			'nama' => $nama,
-			'nik' => $nik,
-			'tgl_lahir' => $tgl_lahir,
-			'tempat_lahir' => $tempat_lahir,
-			'pekerjaan' => $pekerjaan,
-			'jenis_kelamin' => $jenis_kelamin,
-			'no_telpon' => $no_telpon,
-			'tgl_masuk' => $tgl_masuk,
-			'status' => $status
+			'tgl_simpan' => $tgl_simpan,
+			'id_jesim' => $id_jesim,
+			'id_anggota' => $id_anggota,
+			'id_admin' => $id_admin
 		);
 
 		$where = array(

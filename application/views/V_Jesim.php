@@ -11,8 +11,10 @@
   </section>
 
   <section class="content">
+    <div class="row">
+    <div class="col-md-12">
     <div class="box box-primary">
-    <div class="box-header">
+    <div class="box-header with-border">
       <h3 class="box-title">Data Jenis Simpanan</h3>
     <div class="pull-right">
       <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>Tambah</button>
@@ -51,6 +53,8 @@
         </table>
       </div>
     </div>
+  </div>
+  </div>
   </section>
 </div>
 
@@ -89,6 +93,4 @@
       </div>
     </div>
   </div>
-</div>
-
 </div>

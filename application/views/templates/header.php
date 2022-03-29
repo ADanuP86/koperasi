@@ -67,9 +67,7 @@
         var dt = new Date();
         document.getElementById("tanggalwaktu").innerHTML = dt.toLocaleDateString();
         </script>-->
-
+        
         </a>
       </nav>
     </header>
-  </div>
-</body>

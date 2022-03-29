@@ -31,7 +31,7 @@
   <center>
   <h3><b>SISTEM INFORMASI KOPERASI MULYA ABADI SENTOSA</b></h3>
   <h3><b>KAMPUNG WATES</b></h3>
-  <img width="150px" height="125px" src="<?php echo base_url ('assets/'); ?>img/Logo.png" />
+  <img width="175px" height="150px" src="<?php echo base_url ('assets/'); ?>img/Logo Koperasi.png" />
   </center>
 <div class="login-box">
   <div class="login-logo">

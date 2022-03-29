@@ -34,22 +34,22 @@
         <select name="id_jesim" id="id_jesim" class="form-control">
           <option value="" selected disabled>--Pilih--</option>
             <?php foreach ($jenis as $j) : ?>
-          <option <?= $p->id_jesim == $j['id_jesim'] ? 'selected' : ''; ?> <?= set_select('id_jesim', $j['id_jesim']) ?> value="<?= $j['id_jesim'] ?>"><?= $j['nama_simpanan'] ?></option>
+          <option <?= $kpr->id_jesim == $j['id_jesim'] ? 'selected' : ''; ?> <?= set_select('id_jesim', $j['id_jesim']) ?> value="<?= $j['id_jesim'] ?>"><?= $j['nama_simpanan'] ?></option>
             <?php endforeach; ?>
         </select>
       </div>
 
-    <div class="form-group">
+   <!-- <div class="form-group">
       <label for="besar_simpanan">Besar Simpanan</label>
       <input type="text" name="besar_simpanan" class="form-control" id="besar_simpanan" readonly=""> value="<?php echo $kpr->besar_simpanan ?>">
-    </div>
+    </div> -->
 
     <div class="form-group">
         <label>Nama Anggota</label>
         <select name="id_anggota" id="id_anggota" class="form-control">
           <option value="" selected disabled>--Pilih--</option>
             <?php foreach ($anggota as $a) : ?>
-          <option <?= $p->id_anggota == $j['id_anggota'] ? 'selected' : ''; ?> <?= set_select('id_anggota', $j['id_anggota']) ?> value="<?= $j['id_anggota'] ?>"><?= $j['nama_anggota'] ?></option>
+          <option <?= $kpr->id_anggota == $a['id_anggota'] ? 'selected' : ''; ?> <?= set_select('id_anggota', $a['id_anggota']) ?> value="<?= $a['id_anggota'] ?>"><?= $a['nama_anggota'] ?></option>
             <?php endforeach; ?>
         </select>
       </div>
@@ -59,7 +59,7 @@
         <select name="id_admin" id="id_admin" class="form-control">
           <option value="" selected disabled>--Pilih--</option>
             <?php foreach ($admin as $a) : ?>
-          <option <?= $p->id_admin == $j['id_admin'] ? 'selected' : ''; ?> <?= set_select('id_admin', $j['id_admin']) ?> value="<?= $j['id_admin'] ?>"><?= $j['nama_admin'] ?></option>
+          <option <?= $kpr->id_admin == $a['id_admin'] ? 'selected' : ''; ?> <?= set_select('id_admin', $a['id_admin']) ?> value="<?= $a['id_admin'] ?>"><?= $a['nama_admin'] ?></option>
             <?php endforeach; ?>
         </select>
       </div>
