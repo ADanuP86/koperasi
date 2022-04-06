@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2022 at 07:03 PM
+-- Generation Time: Apr 06, 2022 at 07:03 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -56,8 +56,8 @@ CREATE TABLE `anggota` (
   `tempat_lahir` varchar(20) NOT NULL,
   `pekerjaan` varchar(15) NOT NULL,
   `tgl_masuk` date NOT NULL,
-  `status` enum('aktif','non-aktif') NOT NULL,
-  `jenis_kelamin` enum('laki-laki','perempuan') NOT NULL,
+  `status` enum('Aktif','Non-aktif') NOT NULL,
+  `jenis_kelamin` enum('Laki-laki','Perempuan') NOT NULL,
   `no_telpon` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -66,7 +66,8 @@ CREATE TABLE `anggota` (
 --
 
 INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `nik`, `tgl_lahir`, `tempat_lahir`, `pekerjaan`, `tgl_masuk`, `status`, `jenis_kelamin`, `no_telpon`) VALUES
-(4, 'Danu', '1802140502010002', '2022-03-01', 'Metro', 'Mahasiswa', '2022-03-27', 'aktif', 'laki-laki', '085245678976');
+(4, 'Danu', '1802140502010002', '2022-03-01', 'Metro', 'Mahasiswa', '2022-03-27', 'Aktif', 'Laki-laki', '085245678976'),
+(9, 'Ajo', '1802151911020001', '2022-04-01', 'Metro', 'Mahasiswa', '2022-04-04', 'Aktif', 'Laki-laki', '085234567890');
 
 -- --------------------------------------------------------
 
@@ -87,6 +88,28 @@ CREATE TABLE `angsuran` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `detail_pinjaman`
+-- (See below for the actual view)
+--
+CREATE TABLE `detail_pinjaman` (
+`id_pinjaman` int(3)
+,`besar_pinjaman` varchar(11)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `detail_simpanan`
+-- (See below for the actual view)
+--
+CREATE TABLE `detail_simpanan` (
+`id_simpanan` int(3)
+,`besar_simpanan` varchar(11)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jenis_pinjaman`
 --
 
@@ -103,7 +126,8 @@ CREATE TABLE `jenis_pinjaman` (
 --
 
 INSERT INTO `jenis_pinjaman` (`id_jepin`, `nama_pinjaman`, `tgl_input`, `besar_pinjaman`, `jasa`) VALUES
-(2, 'Anggota', '2022-03-25', '1.000.000', '10%');
+(2, 'Anggota', '2022-03-25', '1000000', '10'),
+(9, 'Full', '2022-04-06', '500000', '10');
 
 -- --------------------------------------------------------
 
@@ -115,7 +139,7 @@ CREATE TABLE `jenis_simpanan` (
   `id_jesim` int(3) NOT NULL,
   `nama_simpanan` varchar(10) NOT NULL,
   `tgl_input` date NOT NULL,
-  `besar_simpanan` varchar(11) DEFAULT NULL
+  `besar_simpanan` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -123,7 +147,8 @@ CREATE TABLE `jenis_simpanan` (
 --
 
 INSERT INTO `jenis_simpanan` (`id_jesim`, `nama_simpanan`, `tgl_input`, `besar_simpanan`) VALUES
-(8, 'Wajib', '2022-03-27', '1.000.000');
+(8, 'Wajib', '2022-03-27', '1000000'),
+(18, 'Pokok', '2022-04-06', '50000');
 
 -- --------------------------------------------------------
 
@@ -136,7 +161,7 @@ CREATE TABLE `pinjaman` (
   `tgl_pinjam` date NOT NULL,
   `id_jepin` int(3) NOT NULL,
   `tgl_tempo` date NOT NULL,
-  `status` enum('belum lunas','lunas') DEFAULT NULL,
+  `status_pinjaman` enum('Lunas','Belum Lunas') NOT NULL,
   `idanggota` int(3) NOT NULL,
   `idadmin` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -145,8 +170,9 @@ CREATE TABLE `pinjaman` (
 -- Dumping data for table `pinjaman`
 --
 
-INSERT INTO `pinjaman` (`id_pinjaman`, `tgl_pinjam`, `id_jepin`, `tgl_tempo`, `status`, `idanggota`, `idadmin`) VALUES
-(1, '2022-03-27', 2, '2022-06-27', 'belum lunas', 4, 1);
+INSERT INTO `pinjaman` (`id_pinjaman`, `tgl_pinjam`, `id_jepin`, `tgl_tempo`, `status_pinjaman`, `idanggota`, `idadmin`) VALUES
+(1, '2022-03-27', 2, '2022-06-27', 'Belum Lunas', 4, 1),
+(6, '2022-04-06', 9, '2022-07-06', 'Belum Lunas', 9, 1);
 
 -- --------------------------------------------------------
 
@@ -167,7 +193,26 @@ CREATE TABLE `simpanan` (
 --
 
 INSERT INTO `simpanan` (`id_simpanan`, `tgl_simpan`, `id_jesim`, `id_anggota`, `id_admin`) VALUES
-(6, '2022-03-28', 8, 4, 1);
+(7, '2022-03-29', 8, 4, 1),
+(14, '2022-04-06', 18, 9, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `detail_pinjaman`
+--
+DROP TABLE IF EXISTS `detail_pinjaman`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `detail_pinjaman`  AS SELECT `a`.`id_pinjaman` AS `id_pinjaman`, `b`.`besar_pinjaman` AS `besar_pinjaman` FROM (`pinjaman` `a` join `jenis_pinjaman` `b`) WHERE `a`.`id_jepin` = `b`.`id_jepin` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `detail_simpanan`
+--
+DROP TABLE IF EXISTS `detail_simpanan`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `detail_simpanan`  AS SELECT `a`.`id_simpanan` AS `id_simpanan`, `b`.`besar_simpanan` AS `besar_simpanan` FROM (`simpanan` `a` join `jenis_simpanan` `b`) WHERE `a`.`id_jesim` = `b`.`id_jesim` ;
 
 --
 -- Indexes for dumped tables
@@ -238,7 +283,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `anggota`
 --
 ALTER TABLE `anggota`
-  MODIFY `id_anggota` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_anggota` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `angsuran`
@@ -250,25 +295,25 @@ ALTER TABLE `angsuran`
 -- AUTO_INCREMENT for table `jenis_pinjaman`
 --
 ALTER TABLE `jenis_pinjaman`
-  MODIFY `id_jepin` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_jepin` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `jenis_simpanan`
 --
 ALTER TABLE `jenis_simpanan`
-  MODIFY `id_jesim` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_jesim` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `pinjaman`
 --
 ALTER TABLE `pinjaman`
-  MODIFY `id_pinjaman` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pinjaman` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `simpanan`
 --
 ALTER TABLE `simpanan`
-  MODIFY `id_simpanan` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_simpanan` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables

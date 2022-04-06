@@ -22,17 +22,36 @@
     </div>
 
     <div class="box-body table-responsive">
+
+    <?php if ($this->session->flashdata('tambah')) : ?>
+      <div class="alert alert-success">
+    <?php echo $this->session->flashdata('tambah'); ?>
+      </div>
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('ubah')) : ?>
+      <div class="alert alert-success">
+    <?php echo $this->session->flashdata('ubah'); ?>
+      </div>
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('hapus')) : ?>
+      <div class="alert alert-warning">
+    <?php echo $this->session->flashdata('hapus'); ?>
+      </div>
+    <?php endif; ?>
+
       <table class="table table-bordered table-striped" id="tabel-data">
         <thead>
         <tr>
-          <th>No</th>
-          <th>Tanggal Pinjaman</th>
-          <th>Jenis Pinjaman</th>
-          <th>Besar Pinjaman</th>
-          <th>Tanggal Tempo</th>
-          <th>Status</th>
-          <th>Nama Anggota</th>
-          <th>Nama Admin</th>
+          <th class="text-center">No</th>
+          <th class="text-center">Tanggal Pinjaman</th>
+          <th class="text-center">Nama Pinjaman</th>
+          <th class="text-center">Besar Pinjaman</th>
+          <th class="text-center">Tanggal Tempo</th>
+          <th class="text-center">Status</th>
+          <th class="text-center">Nama Anggota</th>
+          <th class="text-center">Nama Admin</th>
           <th class="text-center">Aksi</th>
         </tr>
         </thead>
@@ -44,15 +63,25 @@
         foreach ($koperasi as $kpr) : ?>
 
         <tr>
-          <td><?php echo $no++ ?></td>
-          <td><?php echo $kpr->tgl_pinjam ?></td>
-          <td><?php echo $kpr->nama_pinjaman ?></td>
-          <td><?php echo $kpr->besar_pinjaman ?></td>
-          <td><?php echo $kpr->tgl_tempo ?></td>
-          <td><?php echo $kpr->status ?></td>
-          <td><?php echo $kpr->nama_anggota ?></td>
-          <td><?php echo $kpr->nama_admin ?></td>
-          <td class="text-center"><?php echo anchor('C_Pinjaman/edit/'.$kpr->id_pinjaman, '<div class="btn btn-success btn-sm"><i class="fa fa-edit"></i>Edit</div>') ?> <br> <br> <?php echo anchor('C_Pinjaman/delete/'.$kpr->id_pinjaman, '<div class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Delete</div>') ?></td>
+          <td class="text-center"><?php echo $no++ ?></td>
+          <td class="text-center"><?php echo dateindo($kpr->tgl_pinjam) ?></td>
+          <td class="text-center"><?php echo $kpr->nama_pinjaman ?></td>
+          <td class="text-center"><?php echo rupiah($kpr->besar_pinjaman) ?></td>
+          <td class="text-center"><?php echo dateindo($kpr->tgl_tempo) ?></td>
+          <td class="text-center">
+          <?php
+          if($kpr->status_pinjaman == 'Lunas') { ?>
+          <span class="badge alert-info"><?php echo $kpr->status_pinjaman ?></span>
+          <?php } else { ?>
+          <span class="badge alert-warning"><?php echo $kpr->status_pinjaman ?></span>
+           <?php } ?>
+          </td>
+          <td class="text-center"><?php echo $kpr->nama_anggota ?></td>
+          <td class="text-center"><?php echo $kpr->nama_admin ?></td>
+          <td class="text-center">
+          <a href="<?= base_url('C_Pinjaman/edit/' . $kpr->id_pinjaman) ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;Ubah</a> <br> <br>
+          <a href="<?= base_url('C_Pinjaman/delete/' . $kpr->id_pinjaman) ?>" onclick="return confirm('Yakin Ingin Hapus?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</a>
+          </td>
         </tr>
 
       <?php endforeach ?>
@@ -80,31 +109,60 @@
       <form method="post" action="<?php echo base_url(). 'C_Pinjaman/tambah_pinjaman' ?>">
 
         <div class="form-group">
-          <label> Tanggal Pinjaman</label>
+          <label>Tanggal Pinjaman</label>
           <input type="date" name="tgl_pinjam" class="form-control">
         </div>
 
-        <label for="">Nama Pinjaman</label>
         <div class="form-group">
-          <select name="id_jepin" id="id_jepin" class="custom-select">
+          <label>Nama Pinjaman</label>
+          <select name="id_jepin" id="id_jepin" class="form-control">
             <option value="" selected disabled>--Pilih--</option>
-              <?php foreach ($nama as $j) : ?>
+              <?php foreach ($jenis as $j) : ?>
             <option <?= set_select('id_jepin', $j['id_jepin']) ?> value="<?= $j['id_jepin'] ?>"><?= $j['nama_pinjaman'] ?></option>
               <?php endforeach; ?>
           </select>
         </div>
 
+        <!-- <div class="form-group">
+          <label>Besar Pinjaman</label>
+          <input type="text" name="besar_pinjaman" class="form-control" readonly="">
+        </div> -->
+
+        <div class="form-group">
+          <label>Tanggal Tempo</label>
+          <input type="date" name="tgl_tempo" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="status_pinjaman">Status</label>
+          <select name="status_pinjaman" id="status_pinjaman" class="form-control">
+          <option  value="" selected disabled>--Pilih--</option>
+          <option  value="lunas">Lunas</option>
+          <option  value="belum lunas">Belum Lunas</option>
+          </select>
+        </div>
+
         <div class="form-group">
           <label>Nama Anggota</label>
-          <input type="text" name="nama_anggota" class="form-control">
+          <select name="idanggota" id="idanggota" class="form-control">
+            <option value="" selected disabled>--Pilih--</option>
+              <?php foreach ($anggota as $a) : ?>
+            <option <?= set_select('idanggota', $a['id_anggota']) ?> value="<?= $a['id_anggota'] ?>"><?= $a['nama_anggota'] ?></option>
+              <?php endforeach; ?>
+          </select>
         </div>
 
         <div class="form-group">
           <label>Nama Admin</label>
-          <input type="text" name="nama_admin" class="form-control">
+          <select name="idadmin" id="idadmin" class="form-control">
+            <option value="" selected disabled>--Pilih--</option>
+              <?php foreach ($admin as $a) : ?>
+            <option <?= set_select('idadmin', $a['id_admin']) ?> value="<?= $a['id_admin'] ?>"><?= $a['nama_admin'] ?></option>
+              <?php endforeach; ?>
+          </select>
         </div>
 
-        <button type="reset" class="btn btn-danger" data-dismiss="modal">Reset</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Kembali</button>
         <button type="submit" class="btn btn-primary">Simpan</button>
         
         </form>

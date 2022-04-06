@@ -4,91 +4,90 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class C_Pinjaman extends CI_Controller {
 
 	function __construct() {
-      parent::__construct();   
+      parent::__construct();
+	  $this->load->helper('Rupiah');
+	  $this->load->helper('Dateindo');
       $this->load->model('M_Pinjaman');
    }
 
 	public function pinjaman() {
 		$data['koperasi'] = $this->M_Pinjaman->join4table()->result();
+		$data['jenis'] = $this->M_Pinjaman->get('jenis_pinjaman');
+		$data['anggota'] = $this->M_Pinjaman->get('anggota');
+		$data['admin'] = $this->M_Pinjaman->get('admin');
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar');
 		$this->load->view('V_Pinjaman', $data);
 		$this->load->view('templates/footer');
 	}
 
-	public function tambah_simpanan() {
-		$id_anggota = $this->input->post('id_anggota');
-		$nama = $this->input->post('nama');
-		$nik = $this->input->post('nik');
-		$tgl_lahir = $this->input->post('tgl_lahir');
-		$tempat_lahir = $this->input->post('tempat_lahir');
-		$pekerjaan = $this->input->post('pekerjaan');
-		$jenis_kelamin = $this->input->post('jenis_kelamin');
-		$no_telpon = $this->input->post('no_telpon');
-		$tgl_masuk = $this->input->post('tgl_masuk');
-		$status = $this->input->post('status');
+	public function tambah_pinjaman() {
+		$id_pinjaman = $this->input->post('id_pinjaman');
+		$tgl_pinjam = $this->input->post('tgl_pinjam');
+		$id_jepin = $this->input->post('id_jepin');
+		$tgl_tempo = $this->input->post('tgl_tempo');
+		$status_pinjaman = $this->input->post('status_pinjaman');
+		$idanggota = $this->input->post('idanggota');
+		$idadmin = $this->input->post('idadmin');
 
 		$data = array(
-			'nama' => $nama,
-			'nik' => $nik,
-			'tgl_lahir' => $tgl_lahir,
-			'tempat_lahir' => $tempat_lahir,
-			'pekerjaan' => $pekerjaan,
-			'jenis_kelamin' => $jenis_kelamin,
-			'no_telpon' => $no_telpon,
-			'tgl_masuk' => $tgl_masuk,
-			'status' => $status
+			'tgl_pinjam' => $tgl_pinjam,
+			'id_jepin' => $id_jepin,
+			'tgl_tempo' => $tgl_tempo,
+			'status_pinjaman' => $status_pinjaman,
+			'idanggota' => $idanggota,
+			'idadmin' => $idadmin
 		);
 
-		$this->M_Simpanan->input_data($data, 'simpanan');
-		redirect('C_Simpanan/simpanan');
+		$this->M_Pinjaman->input_data($data, 'pinjaman');
+		$this->session->set_flashdata('tambah', 'Data Yang Anda Masukan Berhasil.');
+		redirect('C_Pinjaman/pinjaman');
 	}
 
-	public function delete($id_simpanan) {
-		$where = array('id_simpanan' => $id_simpanan);
-		$this->M_Simpanan->delete_data($where, 'simpanan');
-		redirect ('C_Simpanan/simpanan');
+	public function delete($id_pinjaman) {
+		$where = array('id_pinjaman' => $id_pinjaman);
+		$this->M_Pinjaman->delete_data($where, 'pinjaman');
+		$this->session->set_flashdata('hapus', 'Data Yang Anda Hapus Berhasil.');
+		redirect ('C_Pinjaman/pinjaman');
 	}
 
-	public function edit($id_simpanan) {
-		$where = array('id_simpanan' => $id_simpanan);
-		$data['koperasi'] = $this->M_Simpanan->edit_data($where, 'simpanan')->result();
+	public function edit($id_pinjaman) {
+		$data['jenis'] = $this->M_Pinjaman->get('jenis_pinjaman');
+		$data['anggota'] = $this->M_Pinjaman->get('anggota');
+		$data['admin'] = $this->M_Pinjaman->get('admin');
+		$where = array('id_pinjaman' => $id_pinjaman);
+		$data['koperasi'] = $this->M_Pinjaman->edit_data($where, 'pinjaman')->result();
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar');
-		$this->load->view('Edit_Simpanan', $data);
+		$this->load->view('Edit_Pinjaman', $data);
 		$this->load->view('templates/footer');
 	}
 
 	public function update() {
-		$id_anggota = $this->input->post('id_anggota');
-		$nama = $this->input->post('nama');
-		$nik = $this->input->post('nik');
-		$tgl_lahir = $this->input->post('tgl_lahir');
-		$tempat_lahir = $this->input->post('tempat_lahir');
-		$pekerjaan = $this->input->post('pekerjaan');
-		$jenis_kelamin = $this->input->post('jenis_kelamin');
-		$no_telpon = $this->input->post('no_telpon');
-		$tgl_masuk = $this->input->post('tgl_masuk');
-		$status = $this->input->post('status');
+		$id_pinjaman = $this->input->post('id_pinjaman');
+		$tgl_pinjam = $this->input->post('tgl_pinjam');
+		$id_jepin = $this->input->post('id_jepin');
+		$tgl_tempo = $this->input->post('tgl_tempo');
+		$status_pinjaman = $this->input->post('status_pinjaman');
+		$idanggota = $this->input->post('idanggota');
+		$idadmin = $this->input->post('idadmin');
 
 		$data = array(
-			'nama' => $nama,
-			'nik' => $nik,
-			'tgl_lahir' => $tgl_lahir,
-			'tempat_lahir' => $tempat_lahir,
-			'pekerjaan' => $pekerjaan,
-			'jenis_kelamin' => $jenis_kelamin,
-			'no_telpon' => $no_telpon,
-			'tgl_masuk' => $tgl_masuk,
-			'status' => $status
+			'tgl_pinjam' => $tgl_pinjam,
+			'id_jepin' => $id_jepin,
+			'tgl_tempo' => $tgl_tempo,
+			'status_pinjaman' => $status_pinjaman,
+			'idanggota' => $idanggota,
+			'idadmin' => $idadmin
 		);
 
 		$where = array(
-			'id_simpanan' => $id_simpanan
+			'id_pinjaman' => $id_pinjaman
 		);
 
-		$this->M_Simpanan->update_data($where, $data, 'simpanan');
-		redirect('C_Simpanan/simpanan');
+		$this->M_Pinjaman->update_data($where, $data, 'pinjaman');
+		$this->session->set_flashdata('ubah', 'Data Yang Anda Ubah Berhasil.');
+		redirect('C_Pinjaman/pinjaman');
 	}
 
 }

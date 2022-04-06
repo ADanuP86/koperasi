@@ -17,21 +17,14 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/iCheck/square/blue.css">
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition login-page">
   <center>
-  <h3><b>SISTEM INFORMASI KOPERASI MULYA ABADI SENTOSA</b></h3>
-  <h3><b>KAMPUNG WATES</b></h3>
-  <img width="175px" height="150px" src="<?php echo base_url ('assets/'); ?>img/Logo Koperasi.png" />
+  <h4><b>SISTEM INFORMASI KOPERASI MULYA ABADI SENTOSA</b></h4>
+  <h4><b>KAMPUNG WATES</b></h4>
+  <img width="185px" height="160px" src="<?php echo base_url ('assets/'); ?>img/Logo Koperasi.png" />
   </center>
 <div class="login-box">
   <div class="login-logo">

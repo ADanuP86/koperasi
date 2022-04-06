@@ -38,7 +38,7 @@
           <td><?php echo $kpr->username ?></td>
           <td><?php echo $kpr->nama_admin ?></td>
           <td><?php echo $kpr->role ?></td>
-          <td class="text-center"><?php echo anchor('C_Admin/edit/'.$kpr->id_admin, '<div class="btn btn-success btn-sm"><i class="fa fa-edit"></i>Edit</div>') ?> <?php echo anchor('C_Admin/edit_password/'.$kpr->id_admin, '<div class="btn btn-warning btn-sm"><i class="fa fa-key"></i>Change Password</div>') ?></td>
+          <td class="text-center"><?php echo anchor('C_Admin/edit/'.$kpr->id_admin, '<div class="btn btn-success btn-sm"><i class="fa fa-edit"></i>Edit</div>') ?> <?php echo anchor('C_Admin/edit_password/'.$kpr->id_admin, '<div class="btn btn-warning btn-sm"><i class="fa fa-key"></i>Ubah Password</div>') ?></td>
         </tr>
 
       <?php endforeach ?>

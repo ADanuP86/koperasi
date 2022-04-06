@@ -7,7 +7,7 @@
           <img src="<?php echo base_url() ?>assets/img/Logo Koperasi.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Admin</p>
+          <p><?php echo $this->session->userdata('ses_username'); ?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -35,7 +35,7 @@
           <ul class="treeview-menu">
             <li><a href="<?php echo base_url('C_Simpanan/simpanan') ?>"><i class="fa fa-circle-o"></i> Simpanan</a></li>
             <li><a href="<?php echo base_url('C_Pinjaman/pinjaman') ?>"><i class="fa fa-circle-o"></i> Pinjaman</a></li>
-            <li><a href="<?php echo base_url('C_Login/angsuran') ?>"><i class="fa fa-circle-o"></i> Angsuran</a></li>
+            <li><a href="<?php echo base_url('C_Angsuran/angsuran') ?>"><i class="fa fa-circle-o"></i> Angsuran</a></li>
           </ul>
         </li>
         <li class="treeview" <?=$this->uri->segment(2) == '' || $this->uri->segment(2) == '' ? 'class="active"' : '' ?> class="nav-item">

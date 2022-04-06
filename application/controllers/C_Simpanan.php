@@ -4,7 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class C_Simpanan extends CI_Controller {
 
 	function __construct() {
-      parent::__construct();   
+      parent::__construct();
+	  $this->load->helper('Rupiah');
+	  $this->load->helper('Dateindo');
       $this->load->model('M_Simpanan');
    }
 
@@ -34,12 +36,14 @@ class C_Simpanan extends CI_Controller {
 		);
 
 		$this->M_Simpanan->input_data($data, 'simpanan');
+		$this->session->set_flashdata('tambah', 'Data Yang Anda Masukan Berhasil.');
 		redirect('C_Simpanan/simpanan');
 	}
 
 	public function delete($id_simpanan) {
 		$where = array('id_simpanan' => $id_simpanan);
 		$this->M_Simpanan->delete_data($where, 'simpanan');
+		$this->session->set_flashdata('hapus', 'Data Yang Anda Hapus Berhasil.');
 		redirect ('C_Simpanan/simpanan');
 	}
 
@@ -74,6 +78,7 @@ class C_Simpanan extends CI_Controller {
 		);
 
 		$this->M_Simpanan->update_data($where, $data, 'simpanan');
+		$this->session->set_flashdata('ubah', 'Data Yang Anda Ubah Berhasil.');
 		redirect('C_Simpanan/simpanan');
 	}
 

@@ -2,7 +2,7 @@
     <div class="pull-right hidden-xs">
       <b></b> 
     </div>
-    <strong> <a href="https://adminlte.io"></a></strong>
+    <strong>Copyright &copy; 2022 <a href="#"></a></strong>Koperasi Mulya Abadi Sentosa.
   </footer>
 
   <!-- Control Sidebar -->

@@ -22,13 +22,32 @@
     </div>
 
     <div class="box-body table-responsive">
+
+    <?php if ($this->session->flashdata('tambah')) : ?>
+      <div class="alert alert-success">
+    <?php echo $this->session->flashdata('tambah'); ?>
+      </div>
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('ubah')) : ?>
+      <div class="alert alert-success">
+    <?php echo $this->session->flashdata('ubah'); ?>
+      </div>
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('hapus')) : ?>
+      <div class="alert alert-warning">
+    <?php echo $this->session->flashdata('hapus'); ?>
+      </div>
+    <?php endif; ?>
+
       <table class="table table-bordered table-striped" id="tabel-data">
         <thead>
         <tr>
-          <th>No</th>
-          <th>Nama Simpanan</th>
-          <th>Tanggal Input</th>
-          <th>Besar Simpanan</th>
+          <th class="text-center">No</th>
+          <th class="text-center">Nama Simpanan</th>
+          <th class="text-center">Tanggal Input</th>
+          <th class="text-center">Besar Simpanan</th>
           <th class="text-center">Aksi</th>
         </tr>
         </thead>
@@ -40,11 +59,14 @@
         foreach ($koperasi as $kpr) : ?>
 
         <tr>
-          <td><?php echo $no++ ?></td>
-          <td><?php echo $kpr->nama_simpanan ?></td>
-          <td><?php echo $kpr->tgl_input ?></td>
-          <td><?php echo $kpr->besar_simpanan ?></td>
-          <td class="text-center"><?php echo anchor('C_Jesim/edit/'.$kpr->id_jesim, '<div class="btn btn-success btn-sm"><i class="fa fa-edit"></i>Edit</div>') ?> <?php echo anchor('C_Jesim/delete/'.$kpr->id_jesim, '<div class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Delete</div>') ?></td>
+          <td class="text-center"><?php echo $no++ ?></td>
+          <td class="text-center"><?php echo $kpr->nama_simpanan ?></td>
+          <td class="text-center"><?php echo dateindo($kpr->tgl_input) ?></td>
+          <td class="text-center"><?php echo rupiah($kpr->besar_simpanan) ?></td>
+          <td class="text-center">
+          <a href="<?= base_url('C_Jesim/edit/' . $kpr->id_jesim) ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i>&nbsp;&nbsp;Ubah</a>
+          <a href="<?= base_url('C_Jesim/delete/' . $kpr->id_jesim) ?>" onclick="return confirm('Yakin Ingin Hapus?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</a>
+          </td>
         </tr>
 
       <?php endforeach ?>
@@ -86,7 +108,7 @@
           <input type="text" name="besar_simpanan" class="form-control">
         </div>
 
-        <button type="reset" class="btn btn-danger" data-dismiss="modal">Reset</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Kembali</button>
         <button type="submit" class="btn btn-primary">Simpan</button>
         
         </form>

@@ -1,19 +1,30 @@
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Beranda
-        <small>Beranda</small>
-      </h1>
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Beranda
+      <small>Beranda</small>
+    </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>Beranda</a></li>
         <li class="active">Beranda</li>
       </ol>
-    </section>
+  </section>
 
     <!-- Main content -->
     <section class="content">
+      <div class="row">
+      <div class="col-md-12">
+      <div class="box box-primary">
+      
+      <div class="box-body">
+      <h2>Selamat Datang Administrator</h2>
+      <h4>Sistem Informasi Koperasi Mulya Abadi Sentosa</h4>
+      <p>Jl. Pemuda No. 01 Kampung Wates Kecamatan Bumi Ratu Nuban Kabupaten Lampung Tengah Kode Pos 34161</p><br>
+        </div>
+      </div>
+    </div>
+    </div>
+  
       <!-- Info boxes -->
       <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
@@ -35,8 +46,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Simpanan</span>
-              <span class="info-box-number"><?php echo ($count['anggota']); ?></span>
-              <!--<span class="info-box-number"><?php echo ($sumTotalSimpanan['simpanan']); ?></span>-->
+              <span class="info-box-number"><?php echo rupiah($total_simpanan) ?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -53,7 +63,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Pinjaman</span>
-              <span class="info-box-number">Rp.0</span>
+              <span class="info-box-number"><?php echo rupiah($total_pinjaman) ?></span>
             </div>
             <!-- /.info-box-content -->
           </div>

@@ -50,11 +50,14 @@
     </div>
 
     <div class="form-group">
-      <label for="jenis_kelamin">Jenis Kelamin</label>
+      <label>Jenis Kelamin</label>
       <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
-        <option value="">--Pilih--</option>
-        <option value="laki-laki">Laki-laki</option>
-        <option value="perempuan">Perempuan</option>
+        <?php foreach ($koperasi as $jk) : ?>
+      <option value="" selected disabled>--Pilih--</option>
+      <option <?= $kpr->jenis_kelamin == $jk->jenis_kelamin ? 'selected' : ''; ?> <?= set_select('jenis_kelamin', $jk->jenis_kelamin) ?> value="<?= $jk->jenis_kelamin ?>"><?= $jk->jenis_kelamin ?></option>
+      <option value="Laki-laki">Laki-laki</option>
+      <option value="Perempuan">Perempuan</option>
+        <?php endforeach; ?>
       </select>
     </div>
 
@@ -69,17 +72,21 @@
     </div>
 
     <div class="form-group">
-      <label for="status">Status</label>
+      <label>Status</label>
       <select name="status" id="status" class="form-control">
-        <option value="">--Pilih--</option>
-        <option value="aktif">Aktif</option>
-        <option value="non-aktif">Non-Aktif</option>
+        <?php foreach ($koperasi as $st) : ?>
+      <option value="" selected disabled>--Pilih--</option>
+      <option <?= $kpr->status == $st->status ? 'selected' : ''; ?> <?= set_select('status', $st->status) ?> value="<?= $st->status ?>"><?= $st->status ?></option>
+      <option value="Aktif">Aktif</option>
+      <option value="Non-aktif">Non-aktif</option>
+        <?php endforeach; ?>
       </select>
     </div>
   
     </div>
 
     <div class="box-footer">
+      <a href="<?= base_url('C_Anggota/anggota') ?>" class="btn btn-danger"><i class="fa fa-arrow-left"></i>Kembali</a>
       <button type="submit" class="btn btn-primary">Simpan</button>
     </div>
     </form>

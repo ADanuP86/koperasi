@@ -2,6 +2,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_Pinjaman extends CI_Model {
+
+	public function get($table, $data = null, $where = null)
+        {
+            if ($data != null) {
+                return $this->db->get_where($table, $data)->row_array();
+            } else {
+                return $this->db->get_where($table, $where)->result_array();
+            }
+        }
+	
 	public function tampil_data() {
 		return $this->db->get('pinjaman');
 	}
@@ -33,15 +43,5 @@ class M_Pinjaman extends CI_Model {
       $query = $this->db->get();
       return $query;
    }
-
-    public function getSumTotalSimpanan() {
-        $this->db->select_sum('besar_simpanan');
-        $query = $this->db->get('simpanan');
-        if ($query->num_rows() > 0) {
-            return $query->row()->besar_simpanan;
-        } else {
-            return 0;
-        }
-    }
 	
 }

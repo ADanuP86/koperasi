@@ -2,10 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class C_Anggota extends CI_Controller {
-
 	function __construct() {
       parent::__construct();   
       $this->load->model('M_Anggota');
+	  $this->load->helper('Dateindo');
    }
 
 	public function anggota() {
@@ -41,12 +41,14 @@ class C_Anggota extends CI_Controller {
 		);
 
 		$this->M_Anggota->input_data($data, 'anggota');
+		$this->session->set_flashdata('tambah', 'Data Yang Anda Masukan Berhasil.');
 		redirect('C_Anggota/anggota');
 	}
 
 	public function delete($id_anggota) {
 		$where = array('id_anggota' => $id_anggota);
 		$this->M_Anggota->delete_data($where, 'anggota');
+		$this->session->set_flashdata('hapus', 'Data Yang Anda Hapus Berhasil.');
 		redirect ('C_Anggota/anggota');
 	}
 
@@ -88,6 +90,7 @@ class C_Anggota extends CI_Controller {
 		);
 
 		$this->M_Anggota->update_data($where, $data, 'anggota');
+		$this->session->set_flashdata('ubah', 'Data Yang Anda Ubah Berhasil.');
 		redirect('C_Anggota/anggota');
 	}
 

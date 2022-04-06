@@ -40,7 +40,7 @@
     </div>
 
     <div class="form-group">
-      <label for="jasa">Besar Jasa</label>
+      <label for="jasa">Jasa %</label>
       <input type="text" name="jasa" class="form-control" id="jasa" value="<?php echo $kpr->jasa ?>">
     </div>
   

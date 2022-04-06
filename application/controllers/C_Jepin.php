@@ -4,7 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class C_Jepin extends CI_Controller {
 
 	function __construct() {
-      parent::__construct();   
+      parent::__construct();
+	  $this->load->helper('Rupiah');
+	  $this->load->helper('Dateindo');
       $this->load->model('M_Jepin');
    }
 
@@ -31,12 +33,14 @@ class C_Jepin extends CI_Controller {
 		);
 
 		$this->M_Jepin->input_data($data, 'jenis_pinjaman');
+		$this->session->set_flashdata('tambah', 'Data Yang Anda Masukan Berhasil.');
 		redirect('C_Jepin/jepin');
 	}
 
 	public function delete($id_jepin) {
 		$where = array('id_jepin' => $id_jepin);
 		$this->M_Jepin->delete_data($where, 'jenis_pinjaman');
+		$this->session->set_flashdata('hapus', 'Data Yang Anda Hapus Berhasil.');
 		redirect ('C_Jepin/jepin');
 	}
 
@@ -68,6 +72,7 @@ class C_Jepin extends CI_Controller {
 		);
 
 		$this->M_Jepin->update_data($where, $data, 'jenis_pinjaman');
+		$this->session->set_flashdata('ubah', 'Data Yang Anda Ubah Berhasil.');
 		redirect('C_Jepin/jepin');
 	}
 
