@@ -2,17 +2,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class C_Admin extends CI_Controller {
-
 	function __construct() {
-      parent::__construct();   
-      $this->load->model('M_Admin');
+    	parent::__construct();   
+    	$this->load->model('M_Admin');
    }
 
-   public function admin() {
-		$data['koperasi'] = $this->M_Admin->tampil_data()->result();
+    public function admin() {
+		$data['koperasi'] = $this->M_Admin->tampil_data();
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar');
-		$this->load->view('V_Admin', $data);
+		$this->load->view('Admin/V_Admin', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -21,20 +20,18 @@ class C_Admin extends CI_Controller {
 		$data['koperasi'] = $this->M_Admin->edit_data($where, 'admin')->result();
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar');
-		$this->load->view('Edit_Admin', $data);
+		$this->load->view('Admin/Edit_Admin', $data);
 		$this->load->view('templates/footer');
 	}
 
 	public function update() {
 		$id_admin = $this->input->post('id_admin');
 		$username = $this->input->post('username');
-		//$password = md5($this->input->post('password'));
 		$nama_admin = $this->input->post('nama_admin');
 		$role = $this->input->post('role');
 
 		$data = array(
 			'username' => $username,
-			//'password' => $password,
 			'nama_admin' => $nama_admin,
 			'role' => $role
 		);
@@ -44,6 +41,7 @@ class C_Admin extends CI_Controller {
 		);
 
 		$this->M_Admin->update_data($where, $data, 'admin');
+		$this->session->set_flashdata('ubah', 'Data Yang Anda Ubah Berhasil.');
 		redirect('C_Admin/admin');
 	}
 
@@ -52,7 +50,7 @@ class C_Admin extends CI_Controller {
 		$data['koperasi'] = $this->M_Admin->edit_data($where, 'admin')->result();
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar');
-		$this->load->view('Edit_Password', $data);
+		$this->load->view('Admin/Edit_Password', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -61,7 +59,6 @@ class C_Admin extends CI_Controller {
         $password = md5($this->input->post('password'));
       
         $data = array(
-           
             'password' => $password
         );
 
@@ -70,6 +67,7 @@ class C_Admin extends CI_Controller {
         );
 
         $this->M_Admin->update_data($where, $data, 'admin');
+		$this->session->set_flashdata('ubah_password', 'Password Yang Anda Ubah Berhasil.');
         redirect('C_Admin/admin');
     }
 

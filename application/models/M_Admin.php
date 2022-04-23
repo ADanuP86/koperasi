@@ -3,7 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_Admin extends CI_Model {
 	public function tampil_data() {
-		return $this->db->get('admin');
+		$this->db->order_by('id_admin', 'DESC');
+    	$query = $this->db->get('admin');
+    	return $query->result();
 	}
 
 	public function edit_data($where, $table) {

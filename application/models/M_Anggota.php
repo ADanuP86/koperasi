@@ -3,7 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_Anggota extends CI_Model {
 	public function tampil_data() {
-		return $this->db->get('anggota');
+		$this->db->order_by('id_anggota', 'DESC');
+    	$query = $this->db->get('anggota');
+    	return $query->result();
 	}
 
 	public function input_data($data, $table) {
@@ -23,5 +25,10 @@ class M_Anggota extends CI_Model {
 		$this->db->where($where);
 		$this->db->update($table, $data);
 	}
+
+	public function anggota_status($status) {
+		$this->db->order_by('id_anggota', 'DESC');
+      	return  $this->db->get_where('anggota', $status);
+    }
 	
 }

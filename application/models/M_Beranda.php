@@ -9,7 +9,7 @@ class M_Beranda extends CI_Model {
         	'anggota' => $anggota,
         ];
             return $count;
-        }
+    }
 
     public function hitungJumlahSimpanan() {
     	$this->db->select_sum('besar_simpanan');
@@ -17,21 +17,31 @@ class M_Beranda extends CI_Model {
 
     	if($query->num_rows()>0) {
     		return $query->row()->besar_simpanan;
-    	}
-    	else {
+    	} else {
     		return 0;
     	}
     }
 
     public function hitungJumlahPinjaman() {
     	$this->db->select_sum('besar_pinjaman');
-    	$query = $this->db->get('detail_pinjaman');
+    	$query = $this->db->get('pinjaman');
 
     	if($query->num_rows()>0) {
     		return $query->row()->besar_pinjaman;
-    	}
-    	else {
+    	} else {
     		return 0;
     	}
     }
+
+	public function hitungJumlahAngsuran() {
+    	$this->db->select_sum('besar_angsuran');
+    	$query = $this->db->get('angsuran');
+
+    	if($query->num_rows()>0) {
+    		return $query->row()->besar_angsuran;
+    	} else {
+    		return 0;
+    	}
+    }
+	
 }

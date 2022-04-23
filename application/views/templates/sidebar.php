@@ -49,9 +49,9 @@
             <li>
             <a href="<?php echo base_url('C_Jesim/jesim') ?>">
             <i class="fa fa-circle-o"></i>Pengaturan Simpanan</a></li>
-            <li>
+            <!--<li>
             <a href="<?php echo base_url('C_Jepin/jepin') ?>">
-            <i class="fa fa-circle-o"></i>Pengaturan Pinjaman</a></li>
+            <i class="fa fa-circle-o"></i>Pengaturan Pinjaman</a></li>-->
           </ul>
         </li>
         <li class="treeview" <?=$this->uri->segment(2) == '' || $this->uri->segment(2) == '' ? 'class="active"' : '' ?> class="nav-item">

@@ -233,7 +233,13 @@
 <script src="<?php echo base_url() ?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
     $(document).ready(function(){
-        $('#tabel-data').DataTable();
+        $('#tabel-data').DataTable(
+          {        
+          "language": {
+            "url": "http://cdn.datatables.net/plug-ins/1.10.9/i18n/Indonesian.json",
+            "sEmptyTable": "Tidak ada data di database"
+        }
+        });
     });
 </script>
 <!-- Slimscroll -->

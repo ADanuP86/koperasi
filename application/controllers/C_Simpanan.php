@@ -2,22 +2,21 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class C_Simpanan extends CI_Controller {
-
 	function __construct() {
-      parent::__construct();
-	  $this->load->helper('Rupiah');
-	  $this->load->helper('Dateindo');
-      $this->load->model('M_Simpanan');
-   }
+    	parent::__construct();
+		$this->load->helper('Rupiah');
+		$this->load->helper('Dateindo');
+    	$this->load->model('M_Simpanan');
+    }
 
 	public function simpanan() {
-		$data['koperasi'] = $this->M_Simpanan->join4table()->result();
-		$data['jenis'] = $this->M_Simpanan->get('jenis_simpanan');
-		$data['anggota'] = $this->M_Simpanan->get('anggota');
-		$data['admin'] = $this->M_Simpanan->get('admin');
+		$data['koperasi'] = $this->M_Simpanan->join4table();
+		$data['jenis'] = $this->M_Simpanan->selectjenis();
+		$data['anggota'] = $this->M_Simpanan->selectanggota();
+		$data['admin'] = $this->M_Simpanan->selectadmin();
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar');
-		$this->load->view('V_Simpanan', $data);
+		$this->load->view('Simpanan/V_Simpanan', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -48,14 +47,14 @@ class C_Simpanan extends CI_Controller {
 	}
 
 	public function edit($id_simpanan) {
-		$data['jenis'] = $this->M_Simpanan->get('jenis_simpanan');
-		$data['anggota'] = $this->M_Simpanan->get('anggota');
-		$data['admin'] = $this->M_Simpanan->get('admin');
+		$data['jenis'] = $this->M_Simpanan->selectjenis();
+		$data['anggota'] = $this->M_Simpanan->selectanggota();
+		$data['admin'] = $this->M_Simpanan->selectadmin();
 		$where = array('id_simpanan' => $id_simpanan);
 		$data['koperasi'] = $this->M_Simpanan->edit_data($where, 'simpanan')->result();
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar');
-		$this->load->view('Edit_Simpanan', $data);
+		$this->load->view('Simpanan/Edit_Simpanan', $data);
 		$this->load->view('templates/footer');
 	}
 

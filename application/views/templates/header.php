@@ -57,7 +57,7 @@
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
       <ul style="float:right; margin-top:12px; padding-right:50px">
-        <span style="font-size:15px; color:#FFF;"> <?php echo date("d-m-Y"); ?></span>
+        <span style="font-size:15px; color:#FFF;"> <?php echo date("d-m-Y") ?></span>
         </ul>
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>

@@ -3,7 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_Jepin extends CI_Model {
 	public function tampil_data() {
-		return $this->db->get('jenis_pinjaman');
+		$this->db->order_by('id_jepin', 'DESC');
+    	$query = $this->db->get('jenis_pinjaman');
+    	return $query->result();
 	}
 
 	public function input_data($data, $table) {

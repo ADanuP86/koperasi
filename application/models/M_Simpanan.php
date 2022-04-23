@@ -2,16 +2,41 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_Simpanan extends CI_Model {
-	 public function get($table, $data = null, $where = null) {
-            if ($data != null) {
-                return $this->db->get_where($table, $data)->row_array();
-            } else {
-                return $this->db->get_where($table, $where)->result_array();
-            }
-        }
-	
-	public function tampil_data() {
-		return $this->db->get('simpanan');
+	public function join4table() {
+		$this->db->select('*');
+		$this->db->order_by('id_simpanan', 'DESC');
+		$this->db->from('simpanan');
+		$this->db->join('jenis_simpanan as a','a.id_jesim = simpanan.id_jesim','LEFT');
+		$this->db->join('anggota as b','b.id_anggota = simpanan.id_anggota','LEFT');
+		$this->db->join('admin as c','c.id_admin = simpanan.id_admin','LEFT');
+		return $this->db->get()->result();
+	}
+
+	public function selectanggota() {
+		$this->db->order_by('id_anggota', 'DESC');
+        $this->db->where('status', 'Aktif');
+        return $this->db->get('anggota')->result_array();
+    }
+
+	public function selectjenis() {
+		$this->db->order_by('id_jesim', 'DESC');
+        return $this->db->get('jenis_simpanan')->result_array();
+    }
+
+	public function selectadmin() {
+		$this->db->order_by('id_admin', 'DESC');
+        return $this->db->get('admin')->result_array();
+    }
+
+	public function joinceksimpanan($id_anggota) {
+		$this->db->select('*');
+		$this->db->order_by('id_simpanan', 'DESC');
+		$this->db->from('simpanan');
+		$this->db->join('jenis_simpanan as a','a.id_jesim = simpanan.id_jesim','LEFT');
+		$this->db->join('admin as c','c.id_admin = simpanan.id_admin','LEFT');
+		$this->db->join('anggota as b','b.id_anggota = simpanan.id_anggota','LEFT');
+		$this->db->where('b.id_anggota', $id_anggota);
+		return $this->db->get()->result();
 	}
 
 	public function input_data($data, $table) {
@@ -32,13 +57,4 @@ class M_Simpanan extends CI_Model {
 		$this->db->update($table, $data);
 	}
 
-	public function join4table() {
-      $this->db->select('*');
-      $this->db->from('simpanan');
-      $this->db->join('jenis_simpanan as a','a.id_jesim = simpanan.id_jesim','LEFT');
-      $this->db->join('anggota as b','b.id_anggota = simpanan.id_anggota','LEFT');
-      $this->db->join('admin as c','c.id_admin = simpanan.id_admin','LEFT');
-      $query = $this->db->get();
-      return $query;
-   }
 }

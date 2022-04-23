@@ -2,19 +2,65 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_Pinjaman extends CI_Model {
-
-	public function get($table, $data = null, $where = null)
-        {
-            if ($data != null) {
-                return $this->db->get_where($table, $data)->row_array();
-            } else {
-                return $this->db->get_where($table, $where)->result_array();
-            }
-        }
-	
-	public function tampil_data() {
-		return $this->db->get('pinjaman');
+	public function join4table() {
+		$this->db->select('*');
+		$this->db->order_by('id_pinjaman', 'DESC');
+		$this->db->from('pinjaman');
+		//$this->db->join('jenis_pinjaman as a','a.id_jepin = pinjaman.id_jepin','LEFT');
+		$this->db->join('anggota as b','b.id_anggota = pinjaman.idanggota','LEFT');
+		$this->db->join('admin as c','c.id_admin = pinjaman.idadmin','LEFT');
+		return $this->db->get()->result();
 	}
+	
+	public function selectanggota() {
+		$this->db->order_by('id_anggota', 'DESC');
+		$this->db->where('status', 'Aktif');
+		return $this->db->get('anggota')->result_array();
+	}
+
+	/*public function selectjenis() {
+		$this->db->order_by('id_jepin', 'DESC');
+        return $this->db->get('jenis_pinjaman')->result_array();
+    }*/
+
+	public function selectadmin() {
+		$this->db->order_by('id_admin', 'DESC');
+        return $this->db->get('admin')->result_array();
+    }
+
+	public function joinbuktipinjaman($idanggota) {
+		$this->db->select('*');
+		//$this->db->order_by('id_pinjaman', 'DESC');
+		$this->db->from('pinjaman');
+		//$this->db->join('jenis_simpanan as a','a.id_jesim = simpanan.id_jesim','LEFT');
+		$this->db->join('admin as c','c.id_admin = pinjaman.idadmin','LEFT');
+		$this->db->join('anggota as b','b.id_anggota = pinjaman.idanggota','LEFT');
+		$this->db->where('b.id_anggota', $idanggota);
+		return $this->db->get()->result();
+	}
+
+	public function pinjaman_statuslunas() {
+		$this->db->select('*');
+		$this->db->order_by('id_pinjaman', 'DESC');
+		$this->db->from('pinjaman');
+		//$this->db->join('jenis_pinjaman as a','a.id_jepin = pinjaman.id_jepin','LEFT');
+		$this->db->join('admin as c','c.id_admin = pinjaman.idadmin','LEFT');
+		$this->db->join('anggota as b','b.id_anggota = pinjaman.idanggota','LEFT');
+		$this->db->where('status_pinjaman', 'Lunas');
+		return $this->db->get()->result();
+	}
+
+	public function pinjaman_statusbelumlunas() {
+		$this->db->select('*');
+		$this->db->order_by('id_pinjaman', 'DESC');
+		$this->db->from('pinjaman');
+		//$this->db->join('jenis_pinjaman as a','a.id_jepin = pinjaman.id_jepin','LEFT');
+		$this->db->join('admin as c','c.id_admin = pinjaman.idadmin','LEFT');
+		$this->db->join('anggota as b','b.id_anggota = pinjaman.idanggota','LEFT');
+		$this->db->where('status_pinjaman', 'Belum Lunas');
+		return $this->db->get()->result();
+	}
+
 
 	public function input_data($data, $table) {
 		$this->db->insert($table, $data);
@@ -33,15 +79,5 @@ class M_Pinjaman extends CI_Model {
 		$this->db->where($where);
 		$this->db->update($table, $data);
 	}
-
-	public function join4table() {
-      $this->db->select('*');
-      $this->db->from('pinjaman');
-      $this->db->join('jenis_pinjaman as a','a.id_jepin = pinjaman.id_jepin','LEFT');
-      $this->db->join('anggota as b','b.id_anggota = pinjaman.idanggota','LEFT');
-      $this->db->join('admin as c','c.id_admin = pinjaman.idadmin','LEFT');
-      $query = $this->db->get();
-      return $query;
-   }
 	
 }
