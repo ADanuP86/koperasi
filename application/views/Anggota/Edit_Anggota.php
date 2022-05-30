@@ -1,3 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Include file CSS Bootstrap -->
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
 <div class="content-wrapper">
   <section class="content-header">
     <h1>Anggota
@@ -6,7 +22,7 @@
     <ol class="breadcrumb">
       <li><a href="<?php echo base_url('C_Beranda/index') ?>"><i class="fa fa-dashboard"></i>Beranda</a></li>
       <li><a href="<?php echo base_url('C_Anggota/anggota') ?>"><i class="fa fa-user"></i>Anggota</a></li>
-      <li class="active">Edit Data Anggota</li>
+      <li class="active">Ubah Data Anggota</li>
     </ol>
     </section>
 
@@ -15,7 +31,7 @@
       <div class="col-md-6">
       <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">Edit Data Anggota</h3>
+        <h3 class="box-title">Ubah Data Anggota</h3>
       </div>
 
     <?php foreach($koperasi as $kpr) { ?>
@@ -26,7 +42,7 @@
     <div class="form-group">
       <label for="nama">Nama</label>
       <input type="hidden" name="id_anggota" class="form-control" value="<?php echo $kpr->id_anggota ?>">
-      <input type="text" name="nama_anggota" class="form-control" id="nama" value="<?php echo $kpr->nama_anggota ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
+      <input type="text" name="nama_anggota" class="form-control" id="nama_anggota" value="<?php echo $kpr->nama_anggota ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
     </div>
 
     <div class="form-group">
@@ -47,7 +63,7 @@
 
     <div class="form-group">
       <label>Alamat</label>
-      <input type="text" name="alamat" class="form-control" id="alamat" value="<?php echo $kpr->alamat ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
+      <textarea class="form-control" name="alamat" id="alamat" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')"><?php echo $kpr->alamat ?></textarea>
     </div>
 
     <div class="form-group">
@@ -78,7 +94,7 @@
       <input type="date" name="tgl_masuk" class="form-control" id="tgl_masuk" value="<?php echo $kpr->tgl_masuk ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
     </div>
 
-    <div class="form-group">
+    <!--<div class="form-group">
       <label>Status</label>
       <select name="status" id="status" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
         <?php foreach ($koperasi as $st) : ?>
@@ -88,7 +104,7 @@
       <option value="Non-aktif">Non-aktif</option>
         <?php endforeach; ?>
       </select>
-    </div>
+    </div>-->
   
     </div>
 
@@ -105,3 +121,4 @@
     </div>
   </section>
 </div>
+</html>

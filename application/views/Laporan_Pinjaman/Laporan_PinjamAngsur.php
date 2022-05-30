@@ -45,60 +45,80 @@
 
 	<hr class="line-title">
 
-	<p align="center" style="font-weight: bold;">LAPORAN DATA PINJAMAN KOPERASI MULYA ABADI SENTOSA</p><br>
+	<p align="center" style="font-weight: bold;">LAPORAN DATA PINJAMAN dan ANGSURAN KOPERASI MULYA ABADI SENTOSA</p><br>
 
   <p align="left">Dicetak pada: <?php echo date("d-m-Y") ?></p><br>
 
-	 <table class="table table-bordered table-striped">
+  <table class="table table-bordered table-striped">
+        <thead>
         <tr>
           <th class="text-center">No</th>
           <th class="text-center">Tanggal Pinjaman</th>
-          <th class="text-center">Jasa (%)</th>
+          <th class="text-center">Tanggal Angsuran</th>
+          <!--<th class="text-center">Jasa (%)</th>-->
           <th class="text-center">Jumlah Angsur (x)</th>
+          <th class="text-center">Angsuran Ke-</th>
           <th class="text-center">Lama Angsur (bulan)</th>
           <th class="text-center">Tanggal Tempo</th>
           <th class="text-center">Nama Anggota</th>
           <th class="text-center">Nama Admin</th>
-          <th class="text-center">Status</th>
-          <th class="text-center">Besar Pinjaman</th>
+          <!--<th class="text-center">Status</th>-->
+          <th class="text-center">Besar Angsuran</th>
+          <!--<th class="text-center">Besar Pinjaman</th>-->
         </tr>
+        </thead>
+
+        <tbody>
 
         <?php
         $total_besarpinjaman = 0;
+        $total_besarangsuran = 0;
         $no = 1;
-        if(empty($pinjaman)) { // Jika data tidak ada
+        if(empty($koperasi)) { // Jika data tidak ada
           echo "<tr><td colspan='10'>Data tidak ada</td></tr>";
         }
         else {
-        foreach ($pinjaman as $pin) { 
-        $besar_pinjaman[] = $pin->besar_pinjaman; $total_besarpinjaman = array_sum($besar_pinjaman);
+        foreach ($koperasi as $kpr) { 
+        
+          $besar_pinjaman[] = $kpr->besar_pinjaman; $total_besarpinjaman = $kpr->besar_pinjaman+$kpr->besar_pinjaman/100*$kpr->jasa;
+          $besar_angsuran[] = $kpr->besar_angsuran; $total_besarangsuran = array_sum($besar_angsuran)
+        //$besar_pinjaman[] = $kpr->besar_pinjaman; $total_besarpinjaman = array_sum($besar_pinjaman);
+        
         ?>
 
         <tr>
           <td class="text-center"><?php echo $no++ ?></td>
-          <td class="text-center"><?php echo dateindo($pin->tgl_pinjam) ?></td>
-          <td class="text-center"><?php echo $pin->jasa ?></td>
-          <td class="text-center"><?php echo $pin->jumlah_angsur ?></td>
-          <td class="text-center"><?php echo $pin->lama_angsur ?></td>
-          <td class="text-center"><?php echo dateindo($pin->tgl_tempo) ?></td>
-          <td class="text-center"><?php echo $pin->nama_anggota ?></td>
-          <td class="text-center"><?php echo $pin->nama_admin ?></td>
-          <td class="text-center">
+          <td class="text-center"><?php echo dateindo($kpr->tgl_pinjam) ?></td>
+          <td class="text-center"><?php echo dateindo($kpr->tgl_angsur) ?></td>
+          <!--<td class="text-center"><?php echo $kpr->jasa ?></td>-->
+          <td class="text-center"><?php echo $kpr->jumlah_angsur ?></td>
+          <td class="text-center"><?php echo $kpr->angsuran_ke ?></td>
+          <td class="text-center"><?php echo $kpr->lama_angsur ?></td>
+          <td class="text-center"><?php echo dateindo($kpr->tgl_tempo) ?></td>
+          <td class="text-center"><?php echo $kpr->nama_anggota ?></td>
+          <td class="text-center"><?php echo $kpr->nama_admin ?></td>
+          <!--<td class="text-center">
           <?php
-          if($pin->status_pinjaman == 'Lunas') { ?>
-            <span class="badge alert-info"><?php echo $pin->status_pinjaman ?></span>
+          if($kpr->status_pinjaman == 'Lunas') { ?>
+            <span class="badge alert-info"><?php echo $kpr->status_pinjaman ?></span>
           <?php } else { ?>
-            <span class="badge alert-warning"><?php echo $pin->status_pinjaman ?></span>
+            <span class="badge alert-warning"><?php echo $kpr->status_pinjaman ?></span>
           <?php } ?>
-          </td>
-          <td class="text-center"><?php echo rupiah($pin->besar_pinjaman) ?></td>
+          </td>-->
+          <td class="text-center"><?php echo rupiah($kpr->besar_angsuran) ?></td>
+          <!--<td class="text-center"><?php echo rupiah($kpr->besar_pinjaman) ?></td>-->
         </tr>
 
       <?php } } ?>
       <tr>
+      <th class="text-center" colspan="9">Total Angsuran</th>
+      <th class="text-center"><?php echo rupiah($total_besarangsuran) ?></th>
+     </tr>
+      <tr>
       <th class="text-center" colspan="9">Total Pinjaman</th>
       <th class="text-center"><?php echo rupiah($total_besarpinjaman) ?></th>
      </tr>
+        </tbody>
       </table>
 
     <p style="float:right; text-align:center"> <br>

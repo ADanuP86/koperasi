@@ -1,3 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Include file CSS Bootstrap -->
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
 <div class="content-wrapper">
   <section class="content-header">
     <h1>User Admin
@@ -20,13 +36,26 @@
 
     <?php foreach($koperasi as $kpr) { ?>
 
-    <form role="form" action="<?php echo base_url(). 'C_Admin/update_password'; ?>" method="post">
+    <form role="form" action="<?php echo base_url(). 'C_Admin/update_password/' . $kpr->id_admin; ?>" method="post">
     <div class="box-body">
+
+    <?php if ($this->session->flashdata('gagal_password')) : ?>
+      <div class="alert alert-danger">
+    <?php echo $this->session->flashdata('gagal_password'); ?>
+      </div>
+    <?php endif; ?>
+
+    <div class="form-group">
+      <label for="password_lama">Password Lama</label>
+        <input type="password" class="form-control" id="password_lama" name="password_lama" placeholder="Silakan Isi Password Lama" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
+        <?= form_error('password_lama', '<small class="text-danger pl-3">', '</small>'); ?>
+    </div>
 
     <div class="form-group">
       <label for="password">Password Baru</label>
         <input type="hidden" value="<?php echo $kpr->id_admin ?>" id="id_admin" name="id_admin">
-        <input type="password" class="form-control" id="password" name="password" placeholder="Silakan Isi Password Baru">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Silakan Isi Password Baru" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
+        <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
     </div>
   
     </div>
@@ -44,3 +73,4 @@
     </div>
   </section>
 </div>
+</html>

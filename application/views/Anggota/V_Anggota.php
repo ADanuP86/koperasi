@@ -1,3 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Include file CSS Bootstrap -->
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
 <div class="content-wrapper">
   <section class="content-header">
     <h1>Anggota
@@ -83,7 +99,13 @@
           </td>
           <td class="text-center">
           <a href="<?= base_url('C_Anggota/edit/' . $kpr->id_anggota) ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i>&nbsp;Ubah</a><br><br>
-          <a href="<?= base_url('C_Anggota/delete/' . $kpr->id_anggota) ?>" onclick="return confirm('Yakin Ingin Hapus?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;Hapus</a>
+          <a href="<?= base_url('C_Anggota/delete/' . $kpr->id_anggota) ?>" onclick="return confirm('Yakin Ingin Hapus?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;Hapus</a><br><br>
+          <?php
+          if($kpr->status == 'Aktif') { ?>
+            <a href="<?= base_url('C_Anggota/update_nonaktif/' . $kpr->id_anggota) ?>" onclick="return confirm('Yakin Ingin diNon-aktifkan?')" class="btn btn-warning btn-sm"><i class="fa fa-times"></i>&nbsp;Non-aktifkan</a>
+          <?php } else { ?>
+            <a href="<?= base_url('C_Anggota/update_aktif/' . $kpr->id_anggota) ?>" onclick="return confirm('Yakin Ingin diAktifkan?')" class="btn btn-info btn-sm"><i class="fa fa-check"></i>&nbsp;Aktifkan</a>
+          <?php } ?>
           </td>
         </tr>
 
@@ -98,6 +120,7 @@
     </div>
   </section>
 </div>
+</html>
 
 <!-- Modal
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

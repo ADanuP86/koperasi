@@ -10,14 +10,21 @@ class C_Simpanan extends CI_Controller {
     }
 
 	public function simpanan() {
+		$data['admin'] = $this->db->get_where('admin', ['id_admin' => $this->session->userdata('ses_id')])->row_array();
 		$data['koperasi'] = $this->M_Simpanan->join4table();
 		$data['jenis'] = $this->M_Simpanan->selectjenis();
 		$data['anggota'] = $this->M_Simpanan->selectanggota();
-		$data['admin'] = $this->M_Simpanan->selectadmin();
+		$data['adm'] = $this->M_Simpanan->selectadmin();
 		$this->load->view('templates/header');
-		$this->load->view('templates/sidebar');
+		$this->load->view('templates/sidebar', $data);
 		$this->load->view('Simpanan/V_Simpanan', $data);
 		$this->load->view('templates/footer');
+	}
+
+	public function cetak_buktisimpanan($id_simpanan) {
+		$this->load->library('mypdf');
+		$data['simpanan'] = $this->M_Simpanan->joinbuktisimpanan($id_simpanan);
+		$this->mypdf->generate('Simpanan/Bukti_Simpanan', $data, 'Bukti_Simpanan_Anggota_Koperasi', 'A4', 'potrait');
 	}
 
 	public function tambah_simpanan() {
@@ -47,13 +54,14 @@ class C_Simpanan extends CI_Controller {
 	}
 
 	public function edit($id_simpanan) {
+		$data['admin'] = $this->db->get_where('admin', ['id_admin' => $this->session->userdata('ses_id')])->row_array();
 		$data['jenis'] = $this->M_Simpanan->selectjenis();
 		$data['anggota'] = $this->M_Simpanan->selectanggota();
-		$data['admin'] = $this->M_Simpanan->selectadmin();
+		$data['adm'] = $this->M_Simpanan->selectadmin();
 		$where = array('id_simpanan' => $id_simpanan);
 		$data['koperasi'] = $this->M_Simpanan->edit_data($where, 'simpanan')->result();
 		$this->load->view('templates/header');
-		$this->load->view('templates/sidebar');
+		$this->load->view('templates/sidebar', $data);
 		$this->load->view('Simpanan/Edit_Simpanan', $data);
 		$this->load->view('templates/footer');
 	}

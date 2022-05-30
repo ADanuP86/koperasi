@@ -1,3 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Include file CSS Bootstrap -->
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
 <div class="content-wrapper">
   <section class="content-header">
     <h1>Pinjaman
@@ -27,7 +43,7 @@
     <div class="form-group">
       <label>Tanggal Pinjaman</label>
       <input type="hidden" name="id_pinjaman" class="form-control" value="<?php echo $kpr->id_pinjaman ?>">
-      <input type="date" name="tgl_pinjam" class="form-control" id="tgl_pinjam" value="<?php echo $kpr->tgl_pinjam ?>">
+      <input type="date" name="tgl_pinjam" class="form-control" id="tgl_pinjam" value="<?php echo $kpr->tgl_pinjam ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
     </div>
 
       <!--<div class="form-group">
@@ -41,33 +57,33 @@
       </div>-->
 
     <div class="form-group">
-      <label>Besar Pinjaman</label> *tidak boleh lebih dari jumlah simpanan
-      <input type="number" name="besar_pinjaman" class="form-control" id="besar_pinjaman" value="<?php echo $kpr->besar_pinjaman ?>">
+      <label>Besar Pinjaman</label><!--<font color="red"> *tidak boleh lebih dari jumlah simpanan </font>-->
+      <input type="number" name="besar_pinjaman" class="form-control" id="besar_pinjaman" value="<?php echo $kpr->besar_pinjaman ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
     </div>
 
     <div class="form-group">
-      <label>Jasa %</label>
-      <input type="number" name="jasa" class="form-control" id="jasa" value="<?php echo $kpr->jasa ?>">
+      <label>Jasa (%)</label>
+      <input type="number" name="jasa" class="form-control" id="jasa" value="<?php echo $kpr->jasa ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
     </div>
 
     <div class="form-group">
       <label>Jumlah Angsur (x)</label>
-      <input type="number" name="jumlah_angsur" class="form-control" id="jumlah_angsur" value="<?php echo $kpr->jumlah_angsur ?>">
+      <input type="number" name="jumlah_angsur" class="form-control" id="jumlah_angsur" value="<?php echo $kpr->jumlah_angsur ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
     </div>
 
     <div class="form-group">
       <label>Lama Angsur (bulan)</label>
-      <input type="number" name="lama_angsur" class="form-control" id="lama_angsur" value="<?php echo $kpr->lama_angsur ?>">
+      <input type="number" name="lama_angsur" class="form-control" id="lama_angsur" value="<?php echo $kpr->lama_angsur ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
     </div>
 
-    <div class="form-group">
+    <!--<div class="form-group">
       <label>Tanggal Tempo</label>
-      <input type="date" name="tgl_tempo" class="form-control" id="tgl_tempo" value="<?php echo $kpr->tgl_tempo ?>">
-    </div>
+      <input type="date" name="tgl_tempo" class="form-control" id="tgl_tempo" value="<?php echo $kpr->tgl_tempo ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
+    </div>-->
 
     <div class="form-group">
         <label>Nama Anggota</label>
-        <select name="idanggota" id="idanggota" class="form-control">
+        <select name="idanggota" id="idanggota" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
           <option value="" selected disabled>--Pilih--</option>
             <?php foreach ($anggota as $a) : ?>
           <option <?= $kpr->idanggota == $a['id_anggota'] ? 'selected' : ''; ?> <?= set_select('id_anggota', $a['id_anggota']) ?> value="<?= $a['id_anggota'] ?>"><?= $a['nama_anggota'] ?></option>
@@ -76,26 +92,30 @@
       </div>
 
     <div class="form-group">
-        <label>Nama Admin</label>
-        <select name="idadmin" id="idadmin" class="form-control">
-          <option value="" selected disabled>--Pilih--</option>
-            <?php foreach ($admin as $a) : ?>
-          <option <?= $kpr->idadmin == $a['id_admin'] ? 'selected' : ''; ?> <?= set_select('id_admin', $a['id_admin']) ?> value="<?= $a['id_admin'] ?>"><?= $a['nama_admin'] ?></option>
-            <?php endforeach; ?>
-        </select>
-      </div>
-
-      <div class="form-group">
       <label>Status</label>
-      <select name="status_pinjaman" id="status_pinjaman" class="form-control">
+      <select name="status_pinjaman" id="status_pinjaman" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
         <?php foreach ($koperasi as $stp) : ?>
-      <option value="" selected disabled>--Pilih--</option>
-      <option <?= $kpr->status_pinjaman == $stp->status_pinjaman ? 'selected' : ''; ?> <?= set_select('status_pinjaman', $stp->status_pinjaman) ?> value="<?= $stp->status_pinjaman ?>"><?= $stp->status_pinjaman ?></option>
+      <option <?= $kpr->status_pinjaman == $stp->status_pinjaman ? 'selected' : ''; ?> <?= set_select('status_pinjaman', $stp->status_pinjaman) ?> value="<?= $stp->status_pinjaman ?>"><?= $stp->status_pinjaman ?> </option>
       <option value="Lunas">Lunas</option>
       <option value="Belum Lunas">Belum Lunas</option>
         <?php endforeach; ?>
       </select>
     </div>
+
+    <div class="form-group">
+      <label>Nama Admin</label>
+      <input type="hidden" name="idadmin" class="form-control" id="idadmin" value="<?php echo $admin['id_admin'] ?>">
+      <input type="text" name="nama_admin" class="form-control" id="nama_admin" value="<?php echo $admin['nama_admin'] ?>" readonly>
+    </div>
+    <!--<div class="form-group">
+      <label>Nama Admin</label>
+      <select name="idadmin" id="idadmin" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
+      <option value="" selected disabled>--Pilih--</option>
+        <?php foreach ($adm as $a) : ?>
+      <option <?= $kpr->idadmin == $a['id_admin'] ? 'selected' : ''; ?> <?= set_select('id_admin', $a['id_admin']) ?> value="<?= $a['id_admin'] ?>"><?= $a['nama_admin'] ?></option>
+        <?php endforeach; ?>
+      </select>
+    </div>-->
   
     </div>
 
@@ -112,3 +132,4 @@
     </div>
   </section>
 </div>
+</html>

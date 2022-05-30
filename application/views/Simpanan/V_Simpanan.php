@@ -1,3 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Include file CSS Bootstrap -->
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
 <div class="content-wrapper">
   <section class="content-header">
     <h1>Simpanan
@@ -69,7 +85,8 @@
           <td class="text-center"><?php echo $kpr->nama_admin ?></td>
           <td class="text-center">
           <a href="<?= base_url('C_Simpanan/edit/' . $kpr->id_simpanan) ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i>&nbsp;Ubah</a>
-          <a href="<?= base_url('C_Simpanan/delete/' . $kpr->id_simpanan) ?>" onclick="return confirm('Yakin Ingin Hapus?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;Hapus</a>
+          <a href="<?= base_url('C_Simpanan/delete/' . $kpr->id_simpanan) ?>" onclick="return confirm('Yakin Ingin Hapus?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;Hapus</a><br><br>
+          <a href="<?= base_url('C_Simpanan/cetak_buktisimpanan/' . $kpr->id_simpanan) ?>" class="btn btn-default btn-sm"><i class="fa fa-file-pdf-o"></i>&nbsp;Cetak Bukti</a>
           </td>
         </tr>
 
@@ -99,22 +116,22 @@
 
         <div class="form-group">
           <label>Tanggal Simpanan</label>
-          <input type="date" name="tgl_simpan" class="form-control">
+          <input type="date" name="tgl_simpan" class="form-control" value="<?php echo date("Y-m-d") ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
         </div>
 
         <div class="form-group">
-          <label>Nama Anggota, Pekerjaan</label>
-          <select name="id_anggota" id="id_anggota" class="form-control">
+          <label>Nama Anggota - Pekerjaan</label>
+          <select name="id_anggota" id="id_anggota" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
             <option value="" selected disabled>--Pilih--</option>
               <?php foreach ($anggota as $a) : ?>
-            <option <?= set_select('id_anggota', $a['id_anggota']) ?> value="<?= $a['id_anggota'] ?>"><?= $a['nama_anggota'] ?>, <?= $a['pekerjaan'] ?></option>
+            <option <?= set_select('id_anggota', $a['id_anggota']) ?> value="<?= $a['id_anggota'] ?>"><?= $a['nama_anggota'] ?> - <?= $a['pekerjaan'] ?></option>
               <?php endforeach; ?>
           </select>
         </div>
 
         <div class="form-group">
-          <label>Nama Simpanan</label>
-          <select name="id_jesim" id="id_jesim" class="form-control">
+          <label>Nama Simpanan</label><font color="red"> *harus sesuai pekerjaan </font>
+          <select name="id_jesim" id="id_jesim" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
             <option value="" selected disabled>--Pilih--</option>
               <?php foreach ($jenis as $j) : ?>
             <option <?= set_select('id_jesim', $j['id_jesim']) ?> value="<?= $j['id_jesim'] ?>"><?= $j['nama_simpanan'] ?></option>
@@ -129,13 +146,18 @@
 
         <div class="form-group">
           <label>Nama Admin</label>
-          <select name="id_admin" id="id_admin" class="form-control">
+          <input type="hidden" name="id_admin" class="form-control" id="id_admin" value="<?php echo $admin['id_admin'] ?>">
+          <input type="text" name="nama_admin" class="form-control" id="nama_admin" value="<?php echo $admin['nama_admin'] ?>" readonly>
+        </div>
+        <!--<div class="form-group">
+          <label>Nama Admin</label>
+          <select name="id_admin" id="id_admin" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
             <option value="" selected disabled>--Pilih--</option>
-              <?php foreach ($admin as $a) : ?>
+              <?php foreach ($adm as $a) : ?>
             <option <?= set_select('id_admin', $a['id_admin']) ?> value="<?= $a['id_admin'] ?>"><?= $a['nama_admin'] ?></option>
               <?php endforeach; ?>
           </select>
-        </div>
+        </div>-->
 
         <button type="button" class="btn btn-danger" data-dismiss="modal">Kembali</button>
         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -145,3 +167,4 @@
     </div>
   </div>
 </div>
+</html>

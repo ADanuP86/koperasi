@@ -1,3 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Include file CSS Bootstrap -->
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Include library Bootstrap Datepicker -->
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <!-- Include File jQuery -->
+    <script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
 <div class="content-wrapper">
   <section class="content-header">
       <h1>Data Pinjaman
@@ -30,14 +50,14 @@
         <tr>
           <th class="text-center">No</th>
           <th class="text-center">Tanggal Pinjaman</th>
-          <th class="text-center">Jasa %</th>
+          <th class="text-center">Jasa (%)</th>
           <th class="text-center">Jumlah Angsur (x)</th>
           <th class="text-center">Lama Angsur (bulan)</th>
           <th class="text-center">Tanggal Tempo</th>
           <th class="text-center">Nama Anggota</th>
           <th class="text-center">Nama Admin</th>
-          <th class="text-center">Besar Pinjaman</th>
           <th class="text-center">Status</th>
+          <th class="text-center">Besar Pinjaman</th>
         </tr>
         </thead>
 
@@ -46,7 +66,11 @@
         <?php
         $total_besarpinjaman = 0;
         $no = 1;
-        foreach ($koperasi as $kpr) : 
+        if(empty($koperasi)) { // Jika data tidak ada
+          echo "<tr><td colspan='10'>Data tidak ada</td></tr>";
+        }
+        else {
+        foreach ($koperasi as $kpr) { 
         
         $besar_pinjaman[] = $kpr->besar_pinjaman; $total_besarpinjaman = array_sum($besar_pinjaman);
         
@@ -61,7 +85,6 @@
           <td class="text-center"><?php echo dateindo($kpr->tgl_tempo) ?></td>
           <td class="text-center"><?php echo $kpr->nama_anggota ?></td>
           <td class="text-center"><?php echo $kpr->nama_admin ?></td>
-          <td class="text-center"><?php echo rupiah($kpr->besar_pinjaman) ?></td>
           <td class="text-center">
           <?php
           if($kpr->status_pinjaman == 'Lunas') { ?>
@@ -70,11 +93,12 @@
             <span class="badge alert-warning"><?php echo $kpr->status_pinjaman ?></span>
           <?php } ?>
           </td>
+          <td class="text-center"><?php echo rupiah($kpr->besar_pinjaman) ?></td>
         </tr>
 
-      <?php endforeach ?>
+      <?php } } ?>
       <tr>
-      <th class="text-center" colspan="8">Total Pinjaman</th>
+      <th class="text-center" colspan="9">Total Pinjaman</th>
       <th class="text-center"><?php echo rupiah($total_besarpinjaman) ?></th>
      </tr>
         </tbody>
@@ -85,3 +109,4 @@
   </div>
 </section>
 </div>
+</html>

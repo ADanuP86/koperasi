@@ -53,20 +53,24 @@
         <tr>
           <th class="text-center">No</th>
           <th class="text-center">Tanggal Pinjaman</th>
-          <th class="text-center">Jasa %</th>
+          <th class="text-center">Jasa (%)</th>
           <th class="text-center">Jumlah Angsur (x)</th>
           <th class="text-center">Lama Angsur (bulan)</th>
           <th class="text-center">Tanggal Tempo</th>
           <th class="text-center">Nama Anggota</th>
           <th class="text-center">Nama Admin</th>
-          <th class="text-center">Besar Pinjaman</th>
           <th class="text-center">Status</th>
+          <th class="text-center">Besar Pinjaman</th>
         </tr>
 
         <?php
         $total_besarpinjaman = 0;
         $no = 1;
-        foreach ($pinjaman as $pin) : 
+        if(empty($pinjaman)) { // Jika data tidak ada
+          echo "<tr><td colspan='10'>Data tidak ada</td></tr>";
+        }
+        else {
+        foreach ($pinjaman as $pin) { 
         
         $besar_pinjaman[] = $pin->besar_pinjaman; $total_besarpinjaman = array_sum($besar_pinjaman);
         
@@ -81,7 +85,6 @@
           <td class="text-center"><?php echo dateindo($pin->tgl_tempo) ?></td>
           <td class="text-center"><?php echo $pin->nama_anggota ?></td>
           <td class="text-center"><?php echo $pin->nama_admin ?></td>
-          <td class="text-center"><?php echo rupiah($pin->besar_pinjaman) ?></td>
           <td class="text-center">
           <?php
           if($pin->status_pinjaman == 'Lunas') { ?>
@@ -90,11 +93,12 @@
             <span class="badge alert-warning"><?php echo $pin->status_pinjaman ?></span>
           <?php } ?>
           </td>
+          <td class="text-center"><?php echo rupiah($pin->besar_pinjaman) ?></td>
         </tr>
 
-      <?php endforeach ?>
+      <?php } } ?>
       <tr>
-      <th class="text-center" colspan="8">Total Pinjaman</th>
+      <th class="text-center" colspan="9">Total Pinjaman</th>
       <th class="text-center"><?php echo rupiah($total_besarpinjaman) ?></th>
      </tr>
       </table>

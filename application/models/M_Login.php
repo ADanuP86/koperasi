@@ -1,16 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
- 
-class M_Login extends CI_Model {
-    function get_detail($username, $password) {
-        $sql    = "SELECT * from admin where username='$username' and password='$password'";
-        $query  = $this->db->query($sql);
 
-        if($query->num_rows() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+class M_Login extends CI_Model {
+    function auth_admin($username, $password) {
+		$query = $this->db->query("SELECT * FROM admin WHERE username='$username' AND password=MD5('$password') LIMIT 1");
+		return $query;
+	}
     
 }

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Bukti Pinjaman</title>
+	<title>Bukti Angsuran</title>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -45,32 +45,40 @@
 
 	<hr class="line-title">
 
-	<p align="center" style="font-weight: bold;">BUKTI PINJAMAN ANGGOTA KOPERASI MULYA ABADI SENTOSA</p><br><br><br>
+	<p align="center" style="font-weight: bold;">BUKTI ANGSURAN ANGGOTA KOPERASI MULYA ABADI SENTOSA</p><br><br><br>
 
     <p style="float:left;">Yang bertanda tangan dibawah ini:</p> <br> <br>
 
     <table border="0">
 
         <?php 
-        foreach ($pinjaman as $pin) : ?>
+        foreach ($angsuran as $a) : 
+		$besar_pinjaman[] = $a->besar_pinjaman; $total_besarpinjaman = $a->besar_pinjaman+$a->besar_pinjaman/100*$a->jasa
+		?>
 
         <tr>
-          <td>Nama      : <?php echo $pin->nama_anggota ?></td>
+          <td>Nama				: <?php echo $a->nama_anggota ?></td>
         </tr>
         <tr>
-          <td>Jabatan   : <?php echo $pin->pekerjaan ?></td>
+          <td>Jabatan			: <?php echo $a->pekerjaan ?></td>
         </tr>
         <tr>
-          <td>Alamat	: <?php echo $pin->alamat ?></td>
+          <td>Alamat			: <?php echo $a->alamat ?></td>
+        </tr>
+		<tr>
+          <td>Tanggal Pinjaman	: <?php echo dateindo($a->tgl_pinjam) ?></td>
+        </tr>
+		<tr>
+          <td>Total Pinjaman	: <?php echo rupiah($total_besarpinjaman) ?></td>
         </tr>
 
-      <p style="float:right; text-align:center">
-      Wates, <?php echo dateindo($pin->tgl_pinjam) ?> <br>
-      Peminjam <br> <br> <br> <br> <br>
-      <?php echo $pin->nama_anggota ?> 
-      </p> <br> <br> <br>
+		<p style="float:right; text-align:center">
+      Wates, <?php echo dateindo($a->tgl_angsur) ?> <br>
+      Petugas <br> <br> <br> <br> <br>
+      ( &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; )
+    </p> <br> <br> <br>
 
-      <p style="float:left;">Melakukan Pinjaman Uang Koperasi Mulya Abadi Sentosa Kampung Wates, sebesar <?php echo rupiah($pin->besar_pinjaman) ?>, yang akan diangsur selama <?php echo $pin->lama_angsur ?> bulan dan sebanyak <?php echo $pin->jumlah_angsur ?>x (kali).</p> <br>
+      <p style="float:left;">Melakukan Angsuran Pinjaman Uang Koperasi Mulya Abadi Sentosa Kampung Wates, sebesar <?php echo rupiah($a->besar_angsuran) ?> pada angsuran ke- <?php echo $a->angsuran_ke ?>.</p> <br>
       
       <?php endforeach ?>
 

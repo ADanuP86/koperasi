@@ -10,16 +10,18 @@ class C_Jesim extends CI_Controller {
    }
 
     public function jesim() {
+		$data['admin'] = $this->db->get_where('admin', ['id_admin' => $this->session->userdata('ses_id')])->row_array();
 		$data['koperasi'] = $this->M_Jesim->tampil_data();
 		$this->load->view('templates/header');
-		$this->load->view('templates/sidebar');
+		$this->load->view('templates/sidebar', $data);
 		$this->load->view('Jesim/V_Jesim', $data);
 		$this->load->view('templates/footer');
 	}
 
 	public function tambah() {
+		$data['admin'] = $this->db->get_where('admin', ['id_admin' => $this->session->userdata('ses_id')])->row_array();
 		$this->load->view('templates/header');
-		$this->load->view('templates/sidebar');
+		$this->load->view('templates/sidebar', $data);
 		$this->load->view('Jesim/Tambah_Jesim');
 		$this->load->view('templates/footer');
 	}
@@ -63,10 +65,11 @@ class C_Jesim extends CI_Controller {
     }
 
 	public function edit($id_jesim) {
+		$data['admin'] = $this->db->get_where('admin', ['id_admin' => $this->session->userdata('ses_id')])->row_array();
 		$where = array('id_jesim' => $id_jesim);
 		$data['koperasi'] = $this->M_Jesim->edit_data($where, 'jenis_simpanan')->result();
 		$this->load->view('templates/header');
-		$this->load->view('templates/sidebar');
+		$this->load->view('templates/sidebar', $data);
 		$this->load->view('Jesim/Edit_Jesim', $data);
 		$this->load->view('templates/footer');
 	}

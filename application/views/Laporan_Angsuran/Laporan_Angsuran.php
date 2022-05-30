@@ -61,9 +61,16 @@
             <th class="text-center">Besar Angsuran</th>
         </tr>
 
-        <?php 
+        <?php
+        $total_besarangsuran = 0;
         $no = 1;
-        foreach ($angsuran as $angs) : ?>
+        if(empty($angsuran)) { // Jika data tidak ada
+          echo "<tr><td colspan='8'>Data tidak ada</td></tr>";
+        }
+        else {
+        foreach ($angsuran as $angs) { 
+        $besar_angsuran[] = $angs->besar_angsuran; $total_besarangsuran = array_sum($besar_angsuran);  
+        ?>
 
         <tr>
             <td class="text-center"><?php echo $no++ ?></td>
@@ -76,12 +83,18 @@
             <td class="text-center"><?php echo rupiah($angs->besar_angsuran) ?></td>
         </tr>
 
-      <?php endforeach ?>
+      <?php } } ?>
       <tr>
       <th class="text-center" colspan="7">Total Angsuran</th>
-      <th class="text-center"><?php echo rupiah($total_angsuran) ?></th>
+      <th class="text-center"><?php echo rupiah($total_besarangsuran) ?></th>
      </tr>
       </table>
+
+    <p style="float:right; text-align:center"> <br>
+      Wates, <?php echo date("d-m-Y") ?> <br>
+      Kepala Kampung <br> <br> <br> <br> <br>
+      ( &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; )
+    </p>
 
 </body>
 </html>

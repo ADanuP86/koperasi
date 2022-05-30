@@ -19,20 +19,24 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link href="<?= base_url('assets/'); ?>img/Logo Koperasi.png" rel="shortcut icon" type="image/png">
 </head>
+
 <body class="hold-transition login-page">
-  <center>
-  <h4><b>SISTEM INFORMASI KOPERASI MULYA ABADI SENTOSA</b></h4>
-  <h4><b>KAMPUNG WATES</b></h4>
-  <img width="185px" height="160px" src="<?php echo base_url ('assets/'); ?>img/Logo Koperasi.png" />
-  </center>
+
 <div class="login-box">
+
   <div class="login-logo">
+    <h4><b>SISTEM INFORMASI KOPERASI MULYA ABADI SENTOSA KAMPUNG WATES</b></h4>
     <!--<a href="<?php echo base_url() ?>C_Login"><b>KOPERASI MULYA ABADI SENTOSA</b></a>-->
   </div>
   <!-- /.login-logo -->
+
   <div class="login-box-body">
+  <center>
+    <img width="185px" height="160px" src="<?php echo base_url ('assets/'); ?>img/Logo Koperasi.png" /> <br> <br>
     <p class="login-box-msg">Silakan Login!</p>
+  </center>
 
     <?php if ($this->session->flashdata('info')) : ?>
       <div class="alert alert-danger">
@@ -40,30 +44,33 @@
       </div>
     <?php endif; ?>
 
-    <form action="<?php echo base_url('C_Login/login'); ?>" method="post">
-      <div class="form-group has-feedback">
-        <input type="text" class="form-control" name="username" placeholder="Username" autofocus="" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
-        <span class="glyphicon glyphicon-user form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" name="password" placeholder="Password" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="row">
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Remember Me
-            </label>
-          </div>
+  <form action="<?php echo base_url('C_Login/login'); ?>" method="post">
+    <div class="form-group has-feedback">
+      <input type="text" class="form-control" name="username" placeholder="Username" autofocus="" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
+      <span class="glyphicon glyphicon-user form-control-feedback"></span>
+    </div>
+
+    <div class="form-group has-feedback">
+      <input type="password" class="form-control" name="password" placeholder="Password" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
+      <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-8">
+        <div class="checkbox icheck">
+          <label>
+            <input type="checkbox"> Remember Me
+          </label>
         </div>
-        <!-- /.col -->
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
-        </div>
-        <!-- /.col -->
       </div>
-    </form>
+        <!-- /.col -->
+
+      <div class="col-xs-4">
+        <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
+      </div>
+        <!-- /.col -->
+    </div>
+  </form>
 
   </div>
   <!-- /.login-box-body -->
@@ -84,6 +91,7 @@
       increaseArea: '20%' /* optional */
     });
   });
+
 </script>
 </body>
 </html>

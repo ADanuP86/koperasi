@@ -55,6 +55,7 @@
           <th class="text-center">Tanggal Simpanan</th>
           <th class="text-center">Nama Simpanan</th>
           <th class="text-center">Nama Anggota</th>
+		  <th class="text-center">Status</th>
           <th class="text-center">Nama Admin</th>
 		  <th class="text-center">Besar Simpanan</th>
         </tr>
@@ -62,7 +63,11 @@
         <?php
         $total_besarsimpanan = 0;
         $no = 1;
-        foreach ($ceksimpanan as $ck) : 
+		if(empty($ceksimpanan)) { // Jika data tidak ada
+			echo "<tr><td colspan='7'>Data tidak ada</td></tr>";
+		}
+		else {
+        foreach ($ceksimpanan as $ck) { 
         
         $besar_simpanan[] = $ck->besar_simpanan; $total_besarsimpanan = array_sum($besar_simpanan);
         
@@ -73,13 +78,21 @@
           <td class="text-center"><?php echo dateindo($ck->tgl_simpan) ?></td>
           <td class="text-center"><?php echo $ck->nama_simpanan ?></td>
           <td class="text-center"><?php echo $ck->nama_anggota ?></td>
+		  <td class="text-center">
+          <?php
+          if($ck->status == 'Aktif') { ?>
+          <span class="badge alert-info"><?php echo $ck->status ?></span>
+          <?php } else { ?>
+          <span class="badge alert-warning"><?php echo $ck->status ?></span>
+           <?php } ?>
+          </td>
           <td class="text-center"><?php echo $ck->nama_admin ?></td>
 		  <td class="text-center"><?php echo rupiah($ck->besar_simpanan) ?></td>
         </tr>
 
-      <?php endforeach ?>
+      <?php } } ?>
 	  <tr>
-      <th class="text-center" colspan="5">Total Simpanan</th>
+      <th class="text-center" colspan="6">Total Simpanan</th>
       <th class="text-center"><?php echo rupiah($total_besarsimpanan) ?></th>
      </tr>
       </table>

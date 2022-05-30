@@ -55,29 +55,51 @@
           <th class="text-center">Tanggal Simpanan</th>
           <th class="text-center">Nama Simpanan</th>
           <th class="text-center">Nama Anggota</th>
+		  <th class="text-center">Status</th>
           <th class="text-center">Nama Admin</th>
 		  <th class="text-center">Besar Simpanan</th>
         </tr>
 
-        <?php 
+        <?php
+		$total_besarsimpanan = 0;
         $no = 1;
-        foreach ($simpanan as $sim) : ?>
+		if(empty($sim)) { // Jika data tidak ada
+			echo "<tr><td colspan='7'>Data tidak ada</td></tr>";
+		}
+		else { 
+        foreach ($sim as $s) { 
+		$besar_simpanan[] = $s->besar_simpanan; $total_besarsimpanan = array_sum($besar_simpanan);
+		?>
 
         <tr>
           <td class="text-center"><?php echo $no++ ?></td>
-          <td class="text-center"><?php echo dateindo($sim->tgl_simpan) ?></td>
-          <td class="text-center"><?php echo $sim->nama_simpanan ?></td>
-          <td class="text-center"><?php echo $sim->nama_anggota ?></td>
-          <td class="text-center"><?php echo $sim->nama_admin ?></td>
-		  <td class="text-center"><?php echo rupiah($sim->besar_simpanan) ?></td>
+          <td class="text-center"><?php echo dateindo($s->tgl_simpan) ?></td>
+          <td class="text-center"><?php echo $s->nama_simpanan ?></td>
+          <td class="text-center"><?php echo $s->nama_anggota ?></td>
+		  <td class="text-center">
+          <?php
+          if($s->status == 'Aktif') { ?>
+          <span class="badge alert-info"><?php echo $s->status ?></span>
+          <?php } else { ?>
+          <span class="badge alert-warning"><?php echo $s->status ?></span>
+           <?php } ?>
+          </td>
+          <td class="text-center"><?php echo $s->nama_admin ?></td>
+		  <td class="text-center"><?php echo rupiah($s->besar_simpanan) ?></td>
         </tr>
 
-      <?php endforeach ?>
+      <?php } } ?>
 	  <tr>
-      <th class="text-center" colspan="5">Total Simpanan</th>
-      <th class="text-center"><?php echo rupiah($total_simpanan) ?></th>
+      <th class="text-center" colspan="6">Total Simpanan</th>
+      <th class="text-center"><?php echo rupiah($total_besarsimpanan) ?></th>
      </tr>
       </table>
+
+	<p style="float:right; text-align:center"> <br>
+      Wates, <?php echo date("d-m-Y") ?> <br>
+      Kepala Kampung <br> <br> <br> <br> <br>
+      ( &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; )
+    </p>
 
 </body>
 </html>

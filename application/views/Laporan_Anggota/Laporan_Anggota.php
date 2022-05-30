@@ -50,33 +50,41 @@
 	<p align="left">Dicetak pada: <?php echo date("d-m-Y") ?></p><br>
 
 	 <table class="table table-bordered table-striped">
+      <thead>
         <tr>
           <th class="text-center">No</th>
           <th class="text-center">Nama</th>
           <th class="text-center">NIK</th>
-          <th class="text-center">Tanggal Lahir</th>
-          <th class="text-center">Tempat Lahir</th>
+          <th class="text-center">TTL</th>
+          <th class="text-center">Alamat</th>
           <th class="text-center">Pekerjaan</th>
           <th class="text-center">Jenis Kelamin</th>
-          <th class="text-center">No.Telpon</th>
+          <!--<th class="text-center">No.Telpon</th>-->
           <th class="text-center">Tanggal Masuk</th>
           <th class="text-center">Status</th>
         </tr>
+      </thead>
+
+        <tbody>
 
         <?php 
         $no = 1;
-        foreach ($anggota as $ang) : ?>
+        if(empty($anggota)) { // Jika data tidak ada
+          echo "<tr><td colspan='9'>Data tidak ada</td></tr>";
+        }
+        else { // Jika jumlah data lebih dari 0 (Berarti jika data ada)
+        foreach ($anggota as $ang) { ?>
 
         <tr>
           <td class="text-center"><?php echo $no++ ?></td>
           <td class="text-center"><?php echo $ang->nama_anggota ?></td>
           <td class="text-center"><?php echo $ang->nik ?></td>
-          <td class="text-center"><?php echo $ang->tgl_lahir ?></td>
-          <td class="text-center"><?php echo $ang->tempat_lahir ?></td>
+          <td class="text-center"><?php echo $ang->tempat_lahir ?>, <?php echo dateindo($ang->tgl_lahir) ?></td>
+          <td class="text-center"><?php echo $ang->alamat ?></td>
           <td class="text-center"><?php echo $ang->pekerjaan ?></td>
           <td class="text-center"><?php echo $ang->jenis_kelamin ?></td>
-          <td class="text-center"><?php echo $ang->no_telpon ?></td>
-          <td class="text-center"><?php echo $ang->tgl_masuk ?></td>
+          <!--<td class="text-center"><?php echo $ang->no_telpon ?></td>-->
+          <td class="text-center"><?php echo dateindo($ang->tgl_masuk) ?></td>
           <td class="text-center">
           <?php
           if($ang->status == 'Aktif') { ?>
@@ -87,9 +95,16 @@
           </td>
         </tr>
 
-      <?php endforeach ?>
-
+      <?php } } ?>
+      
+      </tbody>
       </table>
+
+    <p style="float:right; text-align:center"> <br>
+      Wates, <?php echo date("d-m-Y") ?> <br>
+      Kepala Kampung <br> <br> <br> <br> <br>
+      ( &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; )
+    </p>
 
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Bukti Pinjaman</title>
+	<title>Bukti Simpanan</title>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -45,32 +45,32 @@
 
 	<hr class="line-title">
 
-	<p align="center" style="font-weight: bold;">BUKTI PINJAMAN ANGGOTA KOPERASI MULYA ABADI SENTOSA</p><br><br><br>
+	<p align="center" style="font-weight: bold;">BUKTI SIMPANAN ANGGOTA KOPERASI MULYA ABADI SENTOSA</p><br><br><br>
 
     <p style="float:left;">Yang bertanda tangan dibawah ini:</p> <br> <br>
 
     <table border="0">
 
         <?php 
-        foreach ($pinjaman as $pin) : ?>
+        foreach ($simpanan as $sim) : ?>
 
         <tr>
-          <td>Nama      : <?php echo $pin->nama_anggota ?></td>
+          <td>Nama      : <?php echo $sim->nama_anggota ?></td>
         </tr>
         <tr>
-          <td>Jabatan   : <?php echo $pin->pekerjaan ?></td>
+          <td>Jabatan   : <?php echo $sim->pekerjaan ?></td>
         </tr>
         <tr>
-          <td>Alamat	: <?php echo $pin->alamat ?></td>
+          <td>Alamat	: <?php echo $sim->alamat ?></td>
         </tr>
 
-      <p style="float:right; text-align:center">
-      Wates, <?php echo dateindo($pin->tgl_pinjam) ?> <br>
-      Peminjam <br> <br> <br> <br> <br>
-      <?php echo $pin->nama_anggota ?> 
-      </p> <br> <br> <br>
+	<p style="float:right; text-align:center">
+      Wates, <?php echo dateindo($sim->tgl_simpan) ?> <br>
+      Petugas <br> <br> <br> <br> <br>
+      ( &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; )
+    </p> <br> <br> <br>
 
-      <p style="float:left;">Melakukan Pinjaman Uang Koperasi Mulya Abadi Sentosa Kampung Wates, sebesar <?php echo rupiah($pin->besar_pinjaman) ?>, yang akan diangsur selama <?php echo $pin->lama_angsur ?> bulan dan sebanyak <?php echo $pin->jumlah_angsur ?>x (kali).</p> <br>
+      <p style="float:left;">Melakukan Simpanan Uang Koperasi Mulya Abadi Sentosa Kampung Wates, sebesar <?php echo rupiah($sim->besar_simpanan) ?>.</p> <br>
       
       <?php endforeach ?>
 

@@ -1,3 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Include file CSS Bootstrap -->
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Include library Bootstrap Datepicker -->
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <!-- Include File jQuery -->
+    <script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
 <div class="content-wrapper">
   <section class="content-header">
       <h1>Data Simpanan
@@ -22,7 +42,7 @@
     </div>
     
     <div class="box-body table-responsive">
-      <table class="table table-bordered table-striped">
+      <table class="table table-bordered table-striped" id="tabel-data">
         <thead>
         <tr>
           <th class="text-center">No</th>
@@ -71,3 +91,4 @@
   </div>
 </section>
 </div>
+</html>

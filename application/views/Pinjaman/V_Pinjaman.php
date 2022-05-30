@@ -1,3 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Include file CSS Bootstrap -->
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
 <div class="content-wrapper">
   <section class="content-header">
     <h1>Pinjaman
@@ -47,7 +63,7 @@
           <th class="text-center">No</th>
           <th class="text-center">Tanggal Pinjaman</th>
           <th class="text-center">Besar Pinjaman</th>
-          <th class="text-center">jasa %</th>
+          <th class="text-center">jasa (%)</th>
           <th class="text-center">Jumlah Angsur (x)</th>
           <th class="text-center">Lama Angsur (bulan)</th>
           <th class="text-center">Tanggal Tempo</th>
@@ -85,7 +101,7 @@
           <td class="text-center">
           <a href="<?= base_url('C_Pinjaman/edit/' . $kpr->id_pinjaman) ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i>&nbsp;Ubah</a> <br> <br>
           <a href="<?= base_url('C_Pinjaman/delete/' . $kpr->id_pinjaman) ?>" onclick="return confirm('Yakin Ingin Hapus?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;Hapus</a> <br> <br>
-          <a href="<?= base_url('C_Pinjaman/cetak_buktipinjaman/' . $kpr->idanggota) ?>" class="btn btn-default btn-sm"><i class="fa fa-file-pdf-o"></i>&nbsp;Cetak Bukti</a>
+          <a href="<?= base_url('C_Pinjaman/cetak_buktipinjaman/' . $kpr->id_pinjaman) ?>" class="btn btn-default btn-sm"><i class="fa fa-file-pdf-o"></i>&nbsp;Cetak Bukti</a>
           </td>
         </tr>
 
@@ -99,6 +115,7 @@
   </div>
   </section>
 </div>
+</html>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -115,7 +132,7 @@
 
         <div class="form-group">
           <label>Tanggal Pinjaman</label>
-          <input type="date" name="tgl_pinjam" class="form-control">
+          <input type="date" name="tgl_pinjam" class="form-control" value="<?php echo date("Y-m-d") ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
         </div>
 
         <!--<div class="form-group">
@@ -129,18 +146,18 @@
         </div>-->
 
         <div class="form-group">
-          <label>Besar Pinjaman</label> *tidak boleh lebih dari jumlah simpanan
-          <input type="number" name="besar_pinjaman" class="form-control">
+          <label>Besar Pinjaman</label><!--<font color="red"> *tidak boleh lebih dari jumlah simpanan </font>-->
+          <input type="number" name="besar_pinjaman" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
         </div>
 
         <div class="form-group">
-          <label>Jasa %</label>
-          <input type="number" name="jasa" class="form-control">
+          <label>Jasa (%)</label>
+          <input type="number" name="jasa" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
         </div>
 
         <div class="form-group">
           <label>Jumlah Angsur (x)</label>
-          <input type="number" name="jumlah_angsur" class="form-control">
+          <input type="number" name="jumlah_angsur" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
         </div>
 
         <div class="form-group">
@@ -148,14 +165,14 @@
           <input type="number" name="lama_angsur" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
         </div>
 
-        <div class="form-group">
+        <!--<div class="form-group">
           <label>Tanggal Tempo</label>
-          <input type="date" name="tgl_tempo" class="form-control">
-        </div>
+          <input type="hidden" name="tgl_tempo" class="form-control" value="<?php date('Y-m-d', strtotime('+$lama_angsur month', strtotime('$tgl_pinjam'))) ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
+        </div>-->
 
         <div class="form-group">
           <label>Nama Anggota</label>
-          <select name="idanggota" id="idanggota" class="form-control">
+          <select name="idanggota" id="idanggota" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
             <option value="" selected disabled>--Pilih--</option>
               <?php foreach ($anggota as $a) : ?>
             <option <?= set_select('idanggota', $a['id_anggota']) ?> value="<?= $a['id_anggota'] ?>"><?= $a['nama_anggota'] ?></option>
@@ -164,23 +181,28 @@
         </div>
 
         <div class="form-group">
-          <label>Nama Admin</label>
-          <select name="idadmin" id="idadmin" class="form-control">
-            <option value="" selected disabled>--Pilih--</option>
-              <?php foreach ($admin as $a) : ?>
-            <option <?= set_select('idadmin', $a['id_admin']) ?> value="<?= $a['id_admin'] ?>"><?= $a['nama_admin'] ?></option>
-              <?php endforeach; ?>
-          </select>
-        </div>
-
-        <div class="form-group">
           <label for="status_pinjaman">Status</label>
-          <select name="status_pinjaman" id="status_pinjaman" class="form-control">
+          <select name="status_pinjaman" id="status_pinjaman" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
           <option  value="" selected disabled>--Pilih--</option>
           <option  value="lunas">Lunas</option>
           <option  value="belum lunas">Belum Lunas</option>
           </select>
         </div>
+
+        <div class="form-group">
+          <label>Nama Admin</label>
+          <input type="hidden" name="idadmin" class="form-control" id="idadmin" value="<?php echo $admin['id_admin'] ?>">
+          <input type="text" name="nama_admin" class="form-control" id="nama_admin" value="<?php echo $admin['nama_admin'] ?>" readonly>
+        </div>
+        <!--<div class="form-group">
+          <label>Nama Admin</label>
+          <select name="idadmin" id="idadmin" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
+            <option value="" selected disabled>--Pilih--</option>
+              <?php foreach ($adm as $a) : ?>
+            <option <?= set_select('idadmin', $a['id_admin']) ?> value="<?= $a['id_admin'] ?>"><?= $a['nama_admin'] ?></option>
+              <?php endforeach; ?>
+          </select>
+        </div>-->
 
         <button type="button" class="btn btn-danger" data-dismiss="modal">Kembali</button>
         <button type="submit" class="btn btn-primary">Simpan</button>

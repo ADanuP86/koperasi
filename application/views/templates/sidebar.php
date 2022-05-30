@@ -7,7 +7,7 @@
           <img src="<?php echo base_url() ?>assets/img/Logo Koperasi.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><?php echo $this->session->userdata('ses_username'); ?></p>
+          <p><?php echo $admin['username']; ?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -71,9 +71,9 @@
             <li>
             <a href="<?php echo base_url('C_Laporan/data_pinjaman') ?>">
             <i class="fa fa-circle-o"></i>Data Pinjaman</a></li>
-            <li>
+            <!-- <li>
             <a href="<?php echo base_url('C_Laporan/data_angsuran') ?>">
-            <i class="fa fa-circle-o"></i>Data Angsuran</a></li>
+            <i class="fa fa-circle-o"></i>Data Angsuran</a></li> -->
           </ul>
         </li>
         <li <?=$this->uri->segment(2) == 'admin' || $this->uri->segment(2) == '' ? 'class="active"' : '' ?> class="nav-item">

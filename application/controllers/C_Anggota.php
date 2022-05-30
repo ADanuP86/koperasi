@@ -9,16 +9,18 @@ class C_Anggota extends CI_Controller {
    }
 
 	public function anggota() {
+		$data['admin'] = $this->db->get_where('admin', ['id_admin' => $this->session->userdata('ses_id')])->row_array();
 		$data['koperasi'] = $this->M_Anggota->tampil_data();
 		$this->load->view('templates/header');
-		$this->load->view('templates/sidebar');
+		$this->load->view('templates/sidebar', $data);
 		$this->load->view('Anggota/V_Anggota', $data);
 		$this->load->view('templates/footer');
 	}
 
 	public function tambah() {
+		$data['admin'] = $this->db->get_where('admin', ['id_admin' => $this->session->userdata('ses_id')])->row_array();
 		$this->load->view('templates/header');
-		$this->load->view('templates/sidebar');
+		$this->load->view('templates/sidebar', $data);
 		$this->load->view('Anggota/Tambah_Anggota');
 		$this->load->view('templates/footer');
 	}
@@ -77,10 +79,11 @@ class C_Anggota extends CI_Controller {
     }
 
 	public function edit($id_anggota) {
+		$data['admin'] = $this->db->get_where('admin', ['id_admin' => $this->session->userdata('ses_id')])->row_array();
 		$where = array('id_anggota' => $id_anggota);
 		$data['koperasi'] = $this->M_Anggota->edit_data($where, 'anggota')->result();
 		$this->load->view('templates/header');
-		$this->load->view('templates/sidebar');
+		$this->load->view('templates/sidebar', $data);
 		$this->load->view('Anggota/Edit_Anggota', $data);
 		$this->load->view('templates/footer');
 	}
@@ -96,7 +99,7 @@ class C_Anggota extends CI_Controller {
 		$jenis_kelamin = $this->input->post('jenis_kelamin');
 		$no_telpon = $this->input->post('no_telpon');
 		$tgl_masuk = $this->input->post('tgl_masuk');
-		$status = $this->input->post('status');
+		//$status = $this->input->post('status');
 
 		$data = array(
 			'nama_anggota' => $nama_anggota,
@@ -108,7 +111,7 @@ class C_Anggota extends CI_Controller {
 			'jenis_kelamin' => $jenis_kelamin,
 			'no_telpon' => $no_telpon,
 			'tgl_masuk' => $tgl_masuk,
-			'status' => $status
+			//'status' => $status
 		);
 
 		$where = array(
@@ -118,6 +121,32 @@ class C_Anggota extends CI_Controller {
 			$this->M_Anggota->update_data($where, $data, 'anggota');
 			$this->session->set_flashdata('ubah', 'Data Yang Anda Ubah Berhasil.');
 			redirect('C_Anggota/anggota');
+	}
+
+	public function update_aktif($id_anggota) {
+		$where = array('id_anggota' => $id_anggota);
+		$data = array(
+			'status' => 'Aktif'
+		);
+
+		$this->db->set($data);
+		$this->db->where($where);
+		$this->db->update('anggota');
+		$this->session->set_flashdata('ubah', 'Data Yang Anda Ubah Berhasil.');
+		redirect('C_Anggota/anggota');
+	}
+
+	public function update_nonaktif($id_anggota) {
+		$where = array('id_anggota' => $id_anggota);
+		$data = array(
+			'status' => 'Non-aktif'
+		);
+
+		$this->db->set($data);
+		$this->db->where($where);
+		$this->db->update('anggota');
+		$this->session->set_flashdata('ubah', 'Data Yang Anda Ubah Berhasil.');
+		redirect('C_Anggota/anggota');
 	}
 
 }

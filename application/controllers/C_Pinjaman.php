@@ -10,20 +10,21 @@ class C_Pinjaman extends CI_Controller {
     }
 
 	public function pinjaman() {
+		$data['admin'] = $this->db->get_where('admin', ['id_admin' => $this->session->userdata('ses_id')])->row_array();
 		$data['koperasi'] = $this->M_Pinjaman->join4table();
 		//$data['jenis'] = $this->M_Pinjaman->selectjenis();
 		$data['anggota'] = $this->M_Pinjaman->selectanggota();
-		$data['admin'] = $this->M_Pinjaman->selectadmin();
+		$data['adm'] = $this->M_Pinjaman->selectadmin();
 		$this->load->view('templates/header');
-		$this->load->view('templates/sidebar');
+		$this->load->view('templates/sidebar', $data);
 		$this->load->view('Pinjaman/V_Pinjaman', $data);
 		$this->load->view('templates/footer');
 	}
 
-	public function cetak_buktipinjaman($idanggota) {
+	public function cetak_buktipinjaman($id_pinjaman) {
 		$this->load->library('mypdf');
-		$data['pinjaman'] = $this->M_Pinjaman->joinbuktipinjaman($idanggota);
-		$this->mypdf->generate('Pinjaman/Bukti_Pinjaman', $data, 'Bukti_Pinjaman_Anggota_Koperasi', 'A4', 'landscape');
+		$data['pinjaman'] = $this->M_Pinjaman->joinbuktipinjaman($id_pinjaman);
+		$this->mypdf->generate('Pinjaman/Bukti_Pinjaman', $data, 'Bukti_Pinjaman_Anggota_Koperasi', 'A4', 'potrait');
 	}
 
 	public function tambah_pinjaman() {
@@ -32,6 +33,7 @@ class C_Pinjaman extends CI_Controller {
 		$besar_pinjaman = $this->input->post('besar_pinjaman');
 		$jasa = $this->input->post('jasa');
 		$jumlah_angsur = $this->input->post('jumlah_angsur');
+		$lama_angsur = $this->input->post('lama_angsur');
 		$tgl_tempo = $this->input->post('tgl_tempo');
 		$status_pinjaman = $this->input->post('status_pinjaman');
 		$idanggota = $this->input->post('idanggota');
@@ -42,7 +44,8 @@ class C_Pinjaman extends CI_Controller {
 			'besar_pinjaman' => $besar_pinjaman,
 			'jasa' => $jasa,
 			'jumlah_angsur' => $jumlah_angsur,
-			'tgl_tempo' => $tgl_tempo,
+			'lama_angsur' => $lama_angsur,
+			'tgl_tempo' => date('Y-m-d', strtotime(''.+$lama_angsur.'month', strtotime($tgl_pinjam))),
 			'status_pinjaman' => $status_pinjaman,
 			'idanggota' => $idanggota,
 			'idadmin' => $idadmin
@@ -61,13 +64,14 @@ class C_Pinjaman extends CI_Controller {
 	}
 
 	public function edit($id_pinjaman) {
+		$data['admin'] = $this->db->get_where('admin', ['id_admin' => $this->session->userdata('ses_id')])->row_array();
 		//$data['jenis'] = $this->M_Pinjaman->selectjenis();
 		$data['anggota'] = $this->M_Pinjaman->selectanggota();
-		$data['admin'] = $this->M_Pinjaman->selectadmin();
+		$data['adm'] = $this->M_Pinjaman->selectadmin();
 		$where = array('id_pinjaman' => $id_pinjaman);
 		$data['koperasi'] = $this->M_Pinjaman->edit_data($where, 'pinjaman')->result();
 		$this->load->view('templates/header');
-		$this->load->view('templates/sidebar');
+		$this->load->view('templates/sidebar', $data);
 		$this->load->view('Pinjaman/Edit_Pinjaman', $data);
 		$this->load->view('templates/footer');
 	}
@@ -78,6 +82,7 @@ class C_Pinjaman extends CI_Controller {
 		$besar_pinjaman = $this->input->post('besar_pinjaman');
 		$jasa = $this->input->post('jasa');
 		$jumlah_angsur = $this->input->post('jumlah_angsur');
+		$lama_angsur = $this->input->post('lama_angsur');
 		$tgl_tempo = $this->input->post('tgl_tempo');
 		$status_pinjaman = $this->input->post('status_pinjaman');
 		$idanggota = $this->input->post('idanggota');
@@ -88,7 +93,8 @@ class C_Pinjaman extends CI_Controller {
 			'besar_pinjaman' => $besar_pinjaman,
 			'jasa' => $jasa,
 			'jumlah_angsur' => $jumlah_angsur,
-			'tgl_tempo' => $tgl_tempo,
+			'lama_angsur' => $lama_angsur,
+			'tgl_tempo' => date('Y-m-d', strtotime(''.+$lama_angsur.'month', strtotime($tgl_pinjam))),
 			'status_pinjaman' => $status_pinjaman,
 			'idanggota' => $idanggota,
 			'idadmin' => $idadmin
