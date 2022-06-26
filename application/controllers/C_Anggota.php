@@ -28,12 +28,14 @@ class C_Anggota extends CI_Controller {
 	public function tambah_anggota() {
 		$this->form_validation->set_rules('nik', 'NIK', 'required|max_length[16]|is_unique[anggota.nik]');
         $this->form_validation->set_rules('no_telpon', 'Nomor Telpon', 'required|max_length[15]|is_unique[anggota.no_telpon]');
-        if ($this->form_validation->run() == false) {
+        
+		if($this->form_validation->run() == false) {
             $this->load->view('templates/header');
 			$this->load->view('templates/sidebar');
 			$this->load->view('Anggota/Tambah_Anggota');
 			$this->load->view('templates/footer');
-        } else {
+        } 
+		else {
 			$id_anggota = $this->input->post('id_anggota');
 			$nama_anggota = $this->input->post('nama_anggota');
 			$nik = $this->input->post('nik');
@@ -69,10 +71,12 @@ class C_Anggota extends CI_Controller {
         $where = array('id_anggota' => $id_anggota);
         $this->M_Anggota->delete_data($where, 'anggota');
         $error = $this->db->error();
-        if ($error['code'] !=0) {
+
+        if($error['code'] !=0) {
             $this->session->set_flashdata('hapus', 'Data Memiliki Transaksi, Gagal Terhapus.');
             redirect('C_Anggota/anggota');
-        } else {
+        } 
+		else {
             $this->session->set_flashdata('hapus', 'Data Yang Anda Hapus Berhasil.');
             redirect('C_Anggota/anggota');
         }
@@ -99,7 +103,6 @@ class C_Anggota extends CI_Controller {
 		$jenis_kelamin = $this->input->post('jenis_kelamin');
 		$no_telpon = $this->input->post('no_telpon');
 		$tgl_masuk = $this->input->post('tgl_masuk');
-		//$status = $this->input->post('status');
 
 		$data = array(
 			'nama_anggota' => $nama_anggota,
@@ -111,7 +114,6 @@ class C_Anggota extends CI_Controller {
 			'jenis_kelamin' => $jenis_kelamin,
 			'no_telpon' => $no_telpon,
 			'tgl_masuk' => $tgl_masuk,
-			//'status' => $status
 		);
 
 		$where = array(

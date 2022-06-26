@@ -57,7 +57,7 @@
       </div>-->
 
     <div class="form-group">
-      <label>Besar Pinjaman</label><!--<font color="red"> *tidak boleh lebih dari jumlah simpanan </font>-->
+      <label>Besar Pinjaman</label>
       <input type="number" name="besar_pinjaman" class="form-control" id="besar_pinjaman" value="<?php echo $kpr->besar_pinjaman ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
     </div>
 
@@ -75,11 +75,6 @@
       <label>Lama Angsur (bulan)</label>
       <input type="number" name="lama_angsur" class="form-control" id="lama_angsur" value="<?php echo $kpr->lama_angsur ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
     </div>
-
-    <!--<div class="form-group">
-      <label>Tanggal Tempo</label>
-      <input type="date" name="tgl_tempo" class="form-control" id="tgl_tempo" value="<?php echo $kpr->tgl_tempo ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
-    </div>-->
 
     <div class="form-group">
         <label>Nama Anggota</label>
@@ -107,15 +102,6 @@
       <input type="hidden" name="idadmin" class="form-control" id="idadmin" value="<?php echo $admin['id_admin'] ?>">
       <input type="text" name="nama_admin" class="form-control" id="nama_admin" value="<?php echo $admin['nama_admin'] ?>" readonly>
     </div>
-    <!--<div class="form-group">
-      <label>Nama Admin</label>
-      <select name="idadmin" id="idadmin" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
-      <option value="" selected disabled>--Pilih--</option>
-        <?php foreach ($adm as $a) : ?>
-      <option <?= $kpr->idadmin == $a['id_admin'] ? 'selected' : ''; ?> <?= set_select('id_admin', $a['id_admin']) ?> value="<?= $a['id_admin'] ?>"><?= $a['nama_admin'] ?></option>
-        <?php endforeach; ?>
-      </select>
-    </div>-->
   
     </div>
 
@@ -123,6 +109,7 @@
       <a href="<?= base_url('C_Pinjaman/pinjaman') ?>" class="btn btn-danger"><i class="fa fa-arrow-left"></i>&nbsp;Kembali</a>
       <button type="submit" class="btn btn-primary">Simpan</button>
     </div>
+    
     </form>
 
     <?php } ?>

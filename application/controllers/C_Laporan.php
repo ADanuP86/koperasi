@@ -17,41 +17,38 @@ class C_Laporan extends CI_Controller {
 		$pekerjaan = $this->input->get('pekerjaan');
 		$status = $this->input->get('status');
 		$tgl_awal = $this->input->get('tgl_awal'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
-        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
+        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_akhir sesuai input (kalau tidak ada set kosong)
 
-		if(empty($tgl_awal) or empty($tgl_akhir) or empty($pekerjaan) or empty($status)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
+		if(empty($tgl_awal) or empty($tgl_akhir) or empty($pekerjaan) or empty($status)) { // Cek jika semua kosong, maka :
 			$data['anggota'] = $this->M_Anggota->tampil_data();  // Panggil fungsi view_all yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
 		else { // Jika terisi
-			$data['anggota'] = $this->M_Anggota->tampil($tgl_awal, $tgl_akhir, $pekerjaan, $status);  // Panggil fungsi view_by_date yang ada di TransaksiModel
+			$data['anggota'] = $this->M_Anggota->tampil($tgl_awal, $tgl_akhir, $pekerjaan, $status);  // Panggil fungsi tampil yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir;
-            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
-            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+            //$tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+            //$tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
             //$label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
         }
-		if(isset($tgl_awal) or isset($tgl_akhir)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['anggota'] = $this->M_Anggota->tampil_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_all yang ada di TransaksiModel
+		if(isset($tgl_awal) or isset($tgl_akhir)) { // Cek jika tgl_awal atau tgl_akhir ada, maka :
+			$data['anggota'] = $this->M_Anggota->tampil_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi tampil_by_date yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
-		if(isset($pekerjaan)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['anggota'] = $this->M_Anggota->cari_pekerjaan($pekerjaan);  // Panggil fungsi view_all yang ada di TransaksiModel
+		if(isset($pekerjaan)) { // Cek jika pekerjaan ada, maka :
+			$data['anggota'] = $this->M_Anggota->cari_pekerjaan($pekerjaan);  // Panggil fungsi cari_pekerjaan yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
-		if(isset($status)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['anggota'] = $this->M_Anggota->cari_status($status);  // Panggil fungsi view_all yang ada di TransaksiModel
+		if(isset($status)) { // Cek jika status ada, maka :
+			$data['anggota'] = $this->M_Anggota->cari_status($status);  // Panggil fungsi vari_status yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
 		
 		$data['get_pekerjaan'] = $this->M_Anggota->tampil_pekerjaan();
-		//$pekerjaan = $this->input->get('pekerjaan');
-		//$data['ang'] = $this->db->get_where('anggota', ['id_anggota' => $pekerjaan])->row_array();
 		$data['admin'] = $this->db->get_where('admin', ['id_admin' => $this->session->userdata('ses_id')])->row_array();
-		// $data['anggota'] = $this->M_Anggota->tampil_data();
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('Laporan_Anggota/Data_Anggota', $data);
@@ -63,44 +60,44 @@ class C_Laporan extends CI_Controller {
 		$pekerjaan = $this->input->get('pekerjaan');
 		$status = $this->input->get('status');
 		$tgl_awal = $this->input->get('tgl_awal'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
-        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
+        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_akhir sesuai input (kalau tidak ada set kosong)
 
-		if(empty($tgl_awal) or empty($tgl_akhir) or empty($pekerjaan) or empty($status)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['anggota'] = $this->M_Anggota->tampil_data();  // Panggil fungsi view_all yang ada di TransaksiModel
-            //$url_cetak = 'transaksi/cetak';
+		if(empty($tgl_awal) or empty($tgl_akhir) or empty($pekerjaan) or empty($status)) { // Cek jika semua kosong, maka :
+			$data['anggota'] = $this->M_Anggota->tampil_data();  // Panggil fungsi tampil_data yang ada di TransaksiModel
             //$label = 'Semua Data Transaksi';
         }
 		else { // Jika terisi
-			$data['anggota'] = $this->M_Anggota->tampil($tgl_awal, $tgl_akhir, $pekerjaan, $status);  // Panggil fungsi view_by_date yang ada di TransaksiModel
-            //$url_cetak = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir;
-            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
-            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
-            //$label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
+			$data['anggota'] = $this->M_Anggota->tampil($tgl_awal, $tgl_akhir, $pekerjaan, $status);  // Panggil fungsi tampil yang ada di TransaksiModel
+            // $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+            // $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+            // $label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
+			// $data['label'] = $label;
         }
-		if(isset($tgl_awal) or isset($tgl_akhir)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['anggota'] = $this->M_Anggota->tampil_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_all yang ada di TransaksiModel
-            //$url_cetak = 'transaksi/cetak';
-            //$label = 'Semua Data Transaksi';
+		if(isset($tgl_awal) or isset($tgl_akhir)) { // Cek jika tgl_awal atau tgl_akhir ada, maka :
+			$data['anggota'] = $this->M_Anggota->tampil_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi tampil_by_date yang ada di TransaksiModel
+			// $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+            // $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+            // $label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
+			// $data['label'] = $label;
         }
-		if(isset($pekerjaan)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['anggota'] = $this->M_Anggota->cari_pekerjaan($pekerjaan);  // Panggil fungsi view_all yang ada di TransaksiModel
-            //$url_cetak = 'transaksi/cetak';
-            //$label = 'Semua Data Transaksi';
+		if(isset($pekerjaan)) { // Cek jika pekerjaan ada, maka :
+			$data['anggota'] = $this->M_Anggota->cari_pekerjaan($pekerjaan);  // Panggil fungsi cari_pekerjaan yang ada di TransaksiModel
+            // $label = 'Pekerjaan '.$pekerjaan;
+			// $data['label'] = $label;
         }
-		if(isset($status)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
+		if(isset($status)) { // Cek jika status ada, maka :
 			$data['anggota'] = $this->M_Anggota->cari_status($status);  // Panggil fungsi view_all yang ada di TransaksiModel
-            //$url_cetak = 'transaksi/cetak';
-            //$label = 'Semua Data Transaksi';
+            // $label = 'Status '.$status;
+			// $data['label'] = $label;
         }
 
-		//$data['anggota'] = $this->M_Anggota->tampil_data();
 		$this->mypdf->generate('Laporan_Anggota/Laporan_Anggota', $data, 'Data_Laporan_Anggota_Koperasi', 'A4', 'potrait');
 	}
 
 	public function cetak_semuaanggota() {
 		$this->load->library('mypdf');       
         $data['anggota'] = $this->M_Anggota->tampil_data();
-		$this->mypdf->generate('Laporan_Anggota/Laporan_Anggota', $data, 'Data_Semua_Anggota_Koperasi', 'A4', 'landscape');
+		$this->mypdf->generate('Laporan_Anggota/Laporan_Anggota', $data, 'Data_Semua_Anggota_Koperasi', 'A4', 'potrait');
 	}
 
 	public function anggota_aktif() {
@@ -141,40 +138,39 @@ class C_Laporan extends CI_Controller {
 		$pekerjaan = $this->input->get('pekerjaan');
 		$status = $this->input->get('status');
 		$tgl_awal = $this->input->get('tgl_awal'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
-        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
+        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_akhir sesuai input (kalau tidak ada set kosong)
 
-		if(empty($tgl_awal) or empty($tgl_akhir) or empty($pekerjaan) or empty($status)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['sim'] = $this->M_Simpanan->join4table();  // Panggil fungsi view_all yang ada di TransaksiModel
+		if(empty($tgl_awal) or empty($tgl_akhir) or empty($pekerjaan) or empty($status)) { // Cek jika semua kosong, maka :
+			$data['sim'] = $this->M_Simpanan->join4table();  // Panggil fungsi joint4table yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
 		else { // Jika terisi
-			$data['sim'] = $this->M_Simpanan->tampil($tgl_awal, $tgl_akhir, $pekerjaan, $status);  // Panggil fungsi view_by_date yang ada di TransaksiModel
+			$data['sim'] = $this->M_Simpanan->tampil($tgl_awal, $tgl_akhir, $pekerjaan, $status);  // Panggil fungsi tampil yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir;
-            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
-            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+            //$tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+            //$tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
             //$label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
         }
-		if(isset($tgl_awal) or isset($tgl_akhir)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['sim'] = $this->M_Simpanan->tampil_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_all yang ada di TransaksiModel
+		if(isset($tgl_awal) or isset($tgl_akhir)) { // Cek jika tgl_awal atau tgl_akhir ada, maka :
+			$data['sim'] = $this->M_Simpanan->tampil_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi tampil_by_date yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
-		if(isset($pekerjaan)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['sim'] = $this->M_Simpanan->cari_pekerjaan($pekerjaan);  // Panggil fungsi view_all yang ada di TransaksiModel
+		if(isset($pekerjaan)) { // Cek jika pekerjaan ada, maka :
+			$data['sim'] = $this->M_Simpanan->cari_pekerjaan($pekerjaan);  // Panggil fungsi cari_pekerjaan yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
-		if(isset($status)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['sim'] = $this->M_Simpanan->cari_status($status);  // Panggil fungsi view_all yang ada di TransaksiModel
+		if(isset($status)) { // Cek jika status ada, maka :
+			$data['sim'] = $this->M_Simpanan->cari_status($status);  // Panggil fungsi cari_status yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
-      
+		
         $data['sim'] = $this->M_Anggota->anggota_status();
 		$data['admin'] = $this->db->get_where('admin', ['id_admin' => $this->session->userdata('ses_id')])->row_array();
 		$data['get_pekerjaan'] = $this->M_Anggota->tampil_pekerjaan();
-		//$data['total_simpanan'] = $this->M_Beranda->hitungJumlahSimpanan();
 		
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar', $data);
@@ -187,38 +183,36 @@ class C_Laporan extends CI_Controller {
 		$pekerjaan = $this->input->get('pekerjaan');
 		$status = $this->input->get('status');
 		$tgl_awal = $this->input->get('tgl_awal'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
-        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
+        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_akhir sesuai input (kalau tidak ada set kosong)
 
-		if(empty($tgl_awal) or empty($tgl_akhir) or empty($pekerjaan) or empty($status)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['sim'] = $this->M_Simpanan->join4table();  // Panggil fungsi view_all yang ada di TransaksiModel
+		if(empty($tgl_awal) or empty($tgl_akhir) or empty($pekerjaan) or empty($status)) { // Cek jika semua kosong, maka :
+			$data['sim'] = $this->M_Simpanan->join4table();  // Panggil fungsi joint4table yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
 		else { // Jika terisi
-			$data['sim'] = $this->M_Simpanan->tampil($tgl_awal, $tgl_akhir, $pekerjaan, $status);  // Panggil fungsi view_by_date yang ada di TransaksiModel
+			$data['sim'] = $this->M_Simpanan->tampil($tgl_awal, $tgl_akhir, $pekerjaan, $status);  // Panggil fungsi tampil yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir;
-            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
-            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+            //$tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+            //$tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
             //$label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
         }
-		if(isset($tgl_awal) or isset($tgl_akhir)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['sim'] = $this->M_Simpanan->tampil_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_all yang ada di TransaksiModel
+		if(isset($tgl_awal) or isset($tgl_akhir)) { // Cek jika tgl_awal atau tgl_akhir ada, maka :
+			$data['sim'] = $this->M_Simpanan->tampil_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi tampil_by_date yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
-		if(isset($pekerjaan)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['sim'] = $this->M_Simpanan->cari_pekerjaan($pekerjaan);  // Panggil fungsi view_all yang ada di TransaksiModel
+		if(isset($pekerjaan)) { // Cek jika pekerjaan ada, maka :
+			$data['sim'] = $this->M_Simpanan->cari_pekerjaan($pekerjaan);  // Panggil fungsi cari_pekerjaan yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
-		if(isset($status)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['sim'] = $this->M_Simpanan->cari_status($status);  // Panggil fungsi view_all yang ada di TransaksiModel
+		if(isset($status)) { // Cek jika status ada, maka :
+			$data['sim'] = $this->M_Simpanan->cari_status($status);  // Panggil fungsi cari_status yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
 
-		//$data['total_simpanan'] = $this->M_Beranda->hitungJumlahSimpanan();
-		//$data['simpanan'] = $this->M_Simpanan->join4table();
 		$this->mypdf->generate('Laporan_Simpanan/Laporan_Simpanan', $data, 'Data_Laporan_Simpanan_Koperasi', 'A4', 'potrait');
 	}
 
@@ -269,34 +263,33 @@ class C_Laporan extends CI_Controller {
 	public function data_pinjaman() {
 		$status_pinjaman = $this->input->get('status_pinjaman');
 		$tgl_awal = $this->input->get('tgl_awal'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
-        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
+        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_akhir sesuai input (kalau tidak ada set kosong)
 
-		if(empty($tgl_awal) or empty($tgl_akhir) or empty($status_pinjaman)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['koperasi'] = $this->M_Pinjaman->join4table();  // Panggil fungsi view_all yang ada di TransaksiModel
+		if(empty($tgl_awal) or empty($tgl_akhir) or empty($status_pinjaman)) { // Cek jika semua kosong, maka :
+			$data['koperasi'] = $this->M_Pinjaman->join4table();  // Panggil fungsi joint4table yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
 		else { // Jika terisi
-			$data['koperasi'] = $this->M_Pinjaman->tampil($tgl_awal, $tgl_akhir, $status_pinjaman);  // Panggil fungsi view_by_date yang ada di TransaksiModel
+			$data['koperasi'] = $this->M_Pinjaman->tampil($tgl_awal, $tgl_akhir, $status_pinjaman);  // Panggil fungsi tampil yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir;
-            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
-            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+            //$tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+            //$tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
             //$label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
         }
-		if(isset($tgl_awal) or isset($tgl_akhir)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['koperasi'] = $this->M_Pinjaman->tampil_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_all yang ada di TransaksiModel
+		if(isset($tgl_awal) or isset($tgl_akhir)) { // Cek jika tgl_awal atau tgl_akhir ada, maka :
+			$data['koperasi'] = $this->M_Pinjaman->tampil_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi tampil_by_date yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
-		if(isset($status_pinjaman)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['koperasi'] = $this->M_Pinjaman->cari_statuspinjam($status_pinjaman);  // Panggil fungsi view_all yang ada di TransaksiModel
+		if(isset($status_pinjaman)) { // Cek jika status_pinjaman ada, maka :
+			$data['koperasi'] = $this->M_Pinjaman->cari_statuspinjam($status_pinjaman);  // Panggil fungsi cari_statuspinjaman yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
 
 		$data['admin'] = $this->db->get_where('admin', ['id_admin' => $this->session->userdata('ses_id')])->row_array();
-		//$data['total_pinjaman'] = $this->M_Beranda->hitungJumlahPinjaman();
-		//$data['koperasi'] = $this->M_Pinjaman->join4table();
+		
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('Laporan_Pinjaman/Data_Pinjaman', $data);
@@ -307,45 +300,38 @@ class C_Laporan extends CI_Controller {
 		$this->load->library('mypdf');
 		$status_pinjaman = $this->input->get('status_pinjaman');
 		$tgl_awal = $this->input->get('tgl_awal'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
-        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
+        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_akhir sesuai input (kalau tidak ada set kosong)
 
-		if(empty($tgl_awal) or empty($tgl_akhir) or empty($status_pinjaman)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['pinjaman'] = $this->M_Pinjaman->join4table();  // Panggil fungsi view_all yang ada di TransaksiModel
+		if(empty($tgl_awal) or empty($tgl_akhir) or empty($status_pinjaman)) { // Cek jika semua kosong, maka :
+			$data['pinjaman'] = $this->M_Pinjaman->join4table();  // Panggil fungsi joint4table yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
 		else { // Jika terisi
-			$data['pinjaman'] = $this->M_Pinjaman->tampil($tgl_awal, $tgl_akhir, $status_pinjaman);  // Panggil fungsi view_by_date yang ada di TransaksiModel
+			$data['pinjaman'] = $this->M_Pinjaman->tampil($tgl_awal, $tgl_akhir, $status_pinjaman);  // Panggil fungsi tampil yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir;
-            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
-            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+            //$tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+            //$tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
             //$label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
         }
-		if(isset($tgl_awal) or isset($tgl_akhir)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['pinjaman'] = $this->M_Pinjaman->tampil_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_all yang ada di TransaksiModel
+		if(isset($tgl_awal) or isset($tgl_akhir)) { // Cek jika tgl_awal atau tgl_akhir ada, maka :
+			$data['pinjaman'] = $this->M_Pinjaman->tampil_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi tampil_by_date yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
-		if(isset($status_pinjaman)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['pinjaman'] = $this->M_Pinjaman->cari_statuspinjam($status_pinjaman);  // Panggil fungsi view_all yang ada di TransaksiModel
+		if(isset($status_pinjaman)) { // Cek jika status_pinjaman ada, maka :
+			$data['pinjaman'] = $this->M_Pinjaman->cari_statuspinjam($status_pinjaman);  // Panggil fungsi cari_statuspinjam yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
 
-		//$data['total_pinjaman'] = $this->M_Beranda->hitungJumlahPinjaman();
-		//$data['pinjaman'] = $this->M_Pinjaman->join4table();
 		$this->mypdf->generate('Laporan_Pinjaman/Laporan_Pinjaman', $data, 'Data_Laporan_Pinjaman_Koperasi', 'A4', 'potrait');
 	}
 
 	public function cek_angsur($id_pinjaman) {
 		$data['admin'] = $this->db->get_where('admin', ['id_admin' => $this->session->userdata('ses_id')])->row_array();
 		$data['koperasi'] = $this->M_Pinjaman->joincekpinjaman($id_pinjaman);
-		//$data['koperasi'] = $this->M_Angsuran->joincekangsur($id_pinjaman);
-		//$data['angsur'] = $this->M_Angsuran->joinangsuran($id_pinjaman);
 		$data['total_angsur'] = $this->M_Angsuran->count_angsur($id_pinjaman);
-		//$data['pinjaman'] = $this->M_Angsuran->selectpinjaman();
-		//$data['anggota'] = $this->M_Angsuran->selectanggota();
-		//$data['adm'] = $this->M_Angsuran->selectadmin();
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('Laporan_Pinjaman/Cek_Angsur', $data);
@@ -390,24 +376,23 @@ class C_Laporan extends CI_Controller {
 
 	public function data_angsuran() {
 		$tgl_awal = $this->input->get('tgl_awal'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
-        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
+        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_akhir sesuai input (kalau tidak ada set kosong)
 
 		if(empty($tgl_awal) or empty($tgl_akhir)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['koperasi'] = $this->M_Angsuran->joindataangsuran();  // Panggil fungsi view_all yang ada di TransaksiModel
+			$data['koperasi'] = $this->M_Angsuran->joindataangsuran();  // Panggil fungsi jointdataangsuran yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
 		else { // Jika terisi
-			$data['koperasi'] = $this->M_Angsuran->tampil_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_by_date yang ada di TransaksiModel
+			$data['koperasi'] = $this->M_Angsuran->tampil_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi tampil_by_date yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir;
-            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
-            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+            //$tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+            //$tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
             //$label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
         }
 
 		$data['admin'] = $this->db->get_where('admin', ['id_admin' => $this->session->userdata('ses_id')])->row_array();
-		//$data['total_angsuran'] = $this->M_Beranda->hitungJumlahAngsuran();
-		//$data['koperasi'] = $this->M_Angsuran->joindataangsuran();
+
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('Laporan_Angsuran/Data_Angsuran', $data);
@@ -417,23 +402,21 @@ class C_Laporan extends CI_Controller {
 	public function cetak_angsuran() {
 		$this->load->library('mypdf');
 		$tgl_awal = $this->input->get('tgl_awal'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
-        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
+        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_akhir sesuai input (kalau tidak ada set kosong)
 
 		if(empty($tgl_awal) or empty($tgl_akhir)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-			$data['angsuran'] = $this->M_Angsuran->joindataangsuran();  // Panggil fungsi view_all yang ada di TransaksiModel
+			$data['angsuran'] = $this->M_Angsuran->joindataangsuran();  // Panggil fungsi jointdataangsuran yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak';
             //$label = 'Semua Data Transaksi';
         }
 		else { // Jika terisi
-			$data['angsuran'] = $this->M_Angsuran->tampil_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_by_date yang ada di TransaksiModel
+			$data['angsuran'] = $this->M_Angsuran->tampil_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi tampil_by_date yang ada di TransaksiModel
             //$url_cetak = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir;
-            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
-            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+            //$tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+            //$tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
             //$label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
         }
 
-		//$data['total_angsuran'] = $this->M_Beranda->hitungJumlahAngsuran();
-		//$data['angsuran'] = $this->M_Angsuran->joindataangsuran();
 		$this->mypdf->generate('Laporan_Angsuran/Laporan_Angsuran', $data, 'Data_Laporan_Angsuran_Koperasi', 'A4', 'potrait');
 	}
 

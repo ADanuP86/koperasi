@@ -23,6 +23,7 @@
 </style>
 
 </head>
+
 <body>
 
 	<img src="assets/img/Logo LampTeng.png" style="position: absolute; width: 60px; height: auto;">
@@ -45,7 +46,9 @@
 
 	<hr class="line-title">
 
-	<p align="center" style="font-weight: bold;">BUKTI ANGSURAN PINJAMAN LUNAS ANGGOTA KOPERASI MULYA ABADI SENTOSA</p><br><br><br>
+	<p align="center" style="font-weight: bold;">BUKTI ANGSURAN PINJAMAN LUNAS ANGGOTA KOPERASI MULYA ABADI SENTOSA</p><br>
+
+	<p align="left">Dicetak pada: <?php echo date("d-m-Y") ?></p><br>
 
     <p style="float:left;">Yang bertanda tangan dibawah ini:</p> <br> <br>
 
@@ -53,12 +56,8 @@
 
         <?php 
         foreach ($angsuran as $a) : 
-		$besar_pinjaman[] = $a->besar_pinjaman; $total_besarpinjaman = $a->besar_pinjaman+$a->besar_pinjaman/100*$a->jasa;
-        //$besar_angsuran[] = $a->besar_angsuran; $total_besarangsuran = array_sum($besar_angsuran)
+		$besar_pinjaman[] = $a->besar_pinjaman; $total_besarpinjaman = $a->besar_pinjaman+$a->besar_pinjaman/100*$a->jasa
 		?>
-
-        <!--<?php $sisaangsuran = $total_besarpinjaman-$total_besarangsuran
-        ?>-->
 
         <tr>
           <td>Nama				: <?php echo $a->nama_anggota ?></td>
@@ -76,7 +75,7 @@
           <td>Total Pinjaman	: <?php echo rupiah($total_besarpinjaman) ?></td>
         </tr>
 
-		<p style="float:right; text-align:center">
+	<p style="float:right; text-align:center">
       Wates, <?php echo dateindo($a->tgl_angsur) ?> <br>
       Petugas <br> <br> <br> <br> <br>
       ( &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; )

@@ -23,6 +23,7 @@
 </style>
 
 </head>
+
 <body>
 
 	<img src="assets/img/Logo LampTeng.png" style="position: absolute; width: 60px; height: auto;">

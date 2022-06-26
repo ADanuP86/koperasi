@@ -37,7 +37,7 @@ class M_Anggota extends CI_Model {
         $tgl_akhir = $this->db->escape($tgl_akhir);
         $this->db->where('DATE(tgl_masuk) BETWEEN '.$tgl_awal.' AND '.$tgl_akhir);
 		$this->db->where('pekerjaan', $pekerjaan);
-		$this->db->where('status', $status); // Tambahkan where tanggal nya
+		$this->db->where('status', $status); // Tambahkan where status nya
     	return $this->db->get('anggota')->result(); // Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter
   	}
 
@@ -59,17 +59,12 @@ class M_Anggota extends CI_Model {
 		$this->db->update($table, $data);
 	}
 
-	//public function anggota_status($status) {
-	//	$this->db->order_by('id_anggota', 'DESC');
-      //	return $this->db->get_where('anggota', $status);
-    //}
-
 	public function anggota_status() {
 		$this->db->order_by('id_anggota', 'DESC');
 		$this->db->select('*');
 		$this->db->from('anggota');
 		return $this->db->get()->result();
 		$this->db->where('DISTINCT','nama_anggota');
-		return $this->db->get()->result();
 	}
+
 }

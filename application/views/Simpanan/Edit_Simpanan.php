@@ -46,7 +46,7 @@
       <input type="date" name="tgl_simpan" class="form-control" id="tgl_simpan" value="<?php echo $kpr->tgl_simpan ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
     </div>
 
-    <div class="form-group">
+      <div class="form-group">
         <label>Nama Anggota - Pekerjaan</label>
         <select name="id_anggota" id="id_anggota" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
           <option value="" selected disabled>--Pilih--</option>
@@ -57,7 +57,7 @@
       </div>
 
       <div class="form-group">
-        <label>Nama Simpanan</label>
+        <label>Nama Simpanan</label><font color="red"> *harus sesuai pekerjaan </font>
         <select name="id_jesim" id="id_jesim" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
           <option value="" selected disabled>--Pilih--</option>
             <?php foreach ($jenis as $j) : ?>
@@ -66,25 +66,11 @@
         </select>
       </div>
 
-   <!-- <div class="form-group">
-      <label for="besar_simpanan">Besar Simpanan</label>
-      <input type="text" name="besar_simpanan" class="form-control" id="besar_simpanan" readonly=""> value="<?php echo $kpr->besar_simpanan ?>">
-    </div> -->
-
-    <div class="form-group">
+      <div class="form-group">
         <label>Nama Admin</label>
         <input type="hidden" name="id_admin" class="form-control" id="id_admin" value="<?php echo $admin['id_admin'] ?>">
         <input type="text" name="nama_admin" class="form-control" id="nama_admin" value="<?php echo $admin['nama_admin'] ?>" readonly>
-    </div>
-    <!--<div class="form-group">
-        <label>Nama Admin</label>
-        <select name="id_admin" id="id_admin" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
-          <option value="" selected disabled>--Pilih--</option>
-            <?php foreach ($adm as $a) : ?>
-          <option <?= $kpr->id_admin == $a['id_admin'] ? 'selected' : ''; ?> <?= set_select('id_admin', $a['id_admin']) ?> value="<?= $a['id_admin'] ?>"><?= $a['nama_admin'] ?></option>
-            <?php endforeach; ?>
-        </select>
-      </div>-->
+      </div>
   
     </div>
 
@@ -92,6 +78,7 @@
       <a href="<?= base_url('C_Simpanan/simpanan') ?>" class="btn btn-danger"><i class="fa fa-arrow-left"></i>&nbsp;Kembali</a>
       <button type="submit" class="btn btn-primary">Simpan</button>
     </div>
+    
     </form>
 
     <?php } ?>

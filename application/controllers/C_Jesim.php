@@ -28,12 +28,14 @@ class C_Jesim extends CI_Controller {
 
 	public function tambah_jesim() {
 		$this->form_validation->set_rules('nama_simpanan', 'Nama Simpanan', 'required|max_length[15]|is_unique[jenis_simpanan.nama_simpanan]');
-        if ($this->form_validation->run() == false) {
+
+        if($this->form_validation->run() == false) {
             $this->load->view('templates/header');
 			$this->load->view('templates/sidebar');
 			$this->load->view('Jesim/Tambah_Jesim');
 			$this->load->view('templates/footer');
-        } else {
+        } 
+		else {
 		$id_jesim = $this->input->post('id_jesim');
 		$nama_simpanan = $this->input->post('nama_simpanan');
 		$tgl_input = $this->input->post('tgl_input');
@@ -55,10 +57,12 @@ class C_Jesim extends CI_Controller {
         $where = array('id_jesim' => $id_jesim);
         $this->M_Jesim->delete_data($where, 'jenis_simpanan');
         $error = $this->db->error();
-        if ($error['code'] !=0) {
+
+        if($error['code'] !=0) {
             $this->session->set_flashdata('hapus', 'Data Memiliki Transaksi, Gagal Terhapus.');
             redirect('C_Jesim/jesim');
-        } else {
+        } 
+		else {
             $this->session->set_flashdata('hapus', 'Data Yang Anda Hapus Berhasil.');
             redirect('C_Jesim/jesim');
         }

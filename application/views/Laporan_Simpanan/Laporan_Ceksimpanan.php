@@ -23,6 +23,7 @@
 </style>
 
 </head>
+
 <body>
 
 	<img src="assets/img/Logo LampTeng.png" style="position: absolute; width: 60px; height: auto;">
@@ -96,6 +97,12 @@
       <th class="text-center"><?php echo rupiah($total_besarsimpanan) ?></th>
      </tr>
       </table>
+
+	<p style="float:right; text-align:center"> <br>
+      Wates, <?php echo date("d-m-Y") ?> <br>
+      Kepala Kampung <br> <br> <br> <br> <br>
+      ( &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; )
+    </p>
 
 </body>
 </html>

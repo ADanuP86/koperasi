@@ -35,8 +35,6 @@ class C_Angsuran extends CI_Controller {
 		$data['koperasi'] = $this->M_Angsuran->joincekangsur($id_pinjaman);
 		$data['angsur'] = $this->M_Angsuran->joinangsuran($id_pinjaman);
 		$data['total_angsur'] = $this->M_Angsuran->count_angsur($id_pinjaman);
-		//$data['pinjaman'] = $this->M_Angsuran->selectpinjaman();
-		//$data['anggota'] = $this->M_Angsuran->selectanggota();
 		$data['adm'] = $this->M_Angsuran->selectadmin();
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar', $data);
@@ -80,8 +78,8 @@ class C_Angsuran extends CI_Controller {
 		);
 
 		$total_besarangsuran = $total_besarangsuran+$besar_angsuran;
-
-		if($total >= $jml) { //|| $total_besarangsuran > $total_besarpinjaman
+		
+		if($total >= $jml) {
 			$this->session->set_flashdata('gagal', 'Data Yang Anda Masukkan Gagal, Melebihi Jumlah Angsuran.');
 		}
 		elseif($total_besarangsuran > $total_besarpinjaman) {
@@ -91,7 +89,6 @@ class C_Angsuran extends CI_Controller {
 			$this->M_Angsuran->input_data($data, 'angsuran');
 			$this->session->set_flashdata('tambah', 'Data Yang Anda Masukkan Berhasil.');
 		}
-		
 		if($total_besarangsuran == $total_besarpinjaman) {
 			$this->M_Angsuran->update_statuslunas($id_pinjaman);
 		}
@@ -121,9 +118,6 @@ class C_Angsuran extends CI_Controller {
 	}
 
 	public function update($id_pinjaman) {
-		//$jumlah = $this->M_Angsuran->count_jumlah($id_pinjaman);
-		//foreach ($jumlah as $jml) {}
-
 		$pinjaman = $this->M_Angsuran->joincekangsur($id_pinjaman);
 		foreach ($pinjaman as $pjm) {
 			$besar_pinjaman[] = $pjm->besar_pinjaman; 
@@ -135,8 +129,6 @@ class C_Angsuran extends CI_Controller {
 			$arrBesarAngsuran[] = $angs->besar_angsuran; 
 			$total_besarangsuran = array_sum($arrBesarAngsuran);
 		}
-
-		//$total = $this->M_Angsuran->count_angsur($id_pinjaman);
 
 		$id_angsuran = $this->input->post('id_angsuran');
 		$tgl_angsur = $this->input->post('tgl_angsur');
@@ -160,15 +152,7 @@ class C_Angsuran extends CI_Controller {
 		);
 		
 		$total_besarangsuran = $total_besarangsuran-$angs->besar_angsuran+$besar_angsuran;
-		//$total_besarangsuran = $total_besarangsuran+$besar_angsuran;
-		//var_dump($total_besarangsuran);
-		//var_dump($total_besarangsurann);
-		//var_dump($data);
-		//die();
 
-		//if($total >= $jml) { //|| $total_besarangsuran > $total_besarpinjaman
-		//	$this->session->set_flashdata('gagal', 'Data Yang Anda Masukkan Gagal, Melebihi Jumlah Angsuran.');
-		//}
 		if($total_besarangsuran > $total_besarpinjaman) {
 			$this->session->set_flashdata('gagal', 'Data Yang Anda Edit Gagal, Melebihi Jumlah Pinjaman.');
 		}
@@ -176,7 +160,6 @@ class C_Angsuran extends CI_Controller {
 			$this->M_Angsuran->update_data($where, $data, 'angsuran');
 			$this->session->set_flashdata('tambah', 'Data Yang Anda Edit Berhasil.');
 		}
-		
 		if($total_besarangsuran == $total_besarpinjaman) {
 			$this->M_Angsuran->update_statuslunas($id_pinjaman);
 		}
@@ -184,33 +167,6 @@ class C_Angsuran extends CI_Controller {
 			$this->M_Angsuran->update_statusbelumlunas($id_pinjaman);
 		}
 
-		redirect('C_Angsuran/cek_angsur/' . $id_pinjaman);
-	}
-
-	public function update2() {
-		$id_angsuran = $this->input->post('id_angsuran');
-		$tgl_angsur = $this->input->post('tgl_angsur');
-		$id_pinjaman = $this->input->post('id_pinjaman');
-		$angsuran_ke = $this->input->post('angsuran_ke');
-		$besar_angsuran = $this->input->post('besar_angsuran');
-		$idAnggota = $this->input->post('idAnggota');
-		$idAdmin = $this->input->post('idAdmin');
-
-		$data = array(
-			'tgl_angsur' => $tgl_angsur,
-			'id_pinjaman' => $id_pinjaman,
-			'angsuran_ke' => $angsuran_ke,
-			'besar_angsuran' => $besar_angsuran,
-			'idAnggota' => $idAnggota,
-			'idAdmin' => $idAdmin
-		);
-
-		$where = array(
-			'id_angsuran' => $id_angsuran
-		);
-
-		$this->M_Angsuran->update_data($where, $data, 'angsuran');
-		$this->session->set_flashdata('ubah', 'Data Yang Anda Ubah Berhasil.');
 		redirect('C_Angsuran/cek_angsur/' . $id_pinjaman);
 	}
 

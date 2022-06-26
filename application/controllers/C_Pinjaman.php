@@ -7,6 +7,7 @@ class C_Pinjaman extends CI_Controller {
 		$this->load->helper('Rupiah');
 		$this->load->helper('Dateindo');
     	$this->load->model('M_Pinjaman');
+		$this->load->model('M_Angsuran');
     }
 
 	public function pinjaman() {
@@ -107,6 +108,26 @@ class C_Pinjaman extends CI_Controller {
 		$this->M_Pinjaman->update_data($where, $data, 'pinjaman');
 		$this->session->set_flashdata('ubah', 'Data Yang Anda Ubah Berhasil.');
 		redirect('C_Pinjaman/pinjaman');
+	}
+
+	public function cek_pinjamananggota() {
+		$id_anggota = $this->session->userdata('ses_id');
+		$data['anggota'] = $this->db->get_where('anggota', ['id_anggota' => $this->session->userdata('ses_id')])->row_array();
+		$data['koperasi'] = $this->M_Pinjaman->pinjamananggota($id_anggota);
+		$this->load->view('templates/header');
+		$this->load->view('templates/sidebar', $data);
+		$this->load->view('Tampilan_Anggota/T_Pinjaman', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function cek_angsuranggota($id_pinjaman) {
+		$data['anggota'] = $this->db->get_where('anggota', ['id_anggota' => $this->session->userdata('ses_id')])->row_array();
+		$data['koperasi'] = $this->M_Pinjaman->joincekpinjaman($id_pinjaman);
+		$data['total_angsur'] = $this->M_Angsuran->count_angsur($id_pinjaman);
+		$this->load->view('templates/header');
+		$this->load->view('templates/sidebar', $data);
+		$this->load->view('Tampilan_Anggota/T_Cekangsur', $data);
+		$this->load->view('templates/footer');
 	}
 
 }

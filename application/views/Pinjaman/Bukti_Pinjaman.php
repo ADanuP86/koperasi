@@ -23,6 +23,7 @@
 </style>
 
 </head>
+
 <body>
 
 	<img src="assets/img/Logo LampTeng.png" style="position: absolute; width: 60px; height: auto;">
@@ -45,7 +46,9 @@
 
 	<hr class="line-title">
 
-	<p align="center" style="font-weight: bold;">BUKTI PINJAMAN ANGGOTA KOPERASI MULYA ABADI SENTOSA</p><br><br><br>
+	<p align="center" style="font-weight: bold;">BUKTI PINJAMAN ANGGOTA KOPERASI MULYA ABADI SENTOSA</p><br>
+
+	<p align="left">Dicetak pada: <?php echo date("d-m-Y") ?></p><br>
 
     <p style="float:left;">Yang bertanda tangan dibawah ini:</p> <br> <br>
 
@@ -64,11 +67,11 @@
           <td>Alamat	: <?php echo $pin->alamat ?></td>
         </tr>
 
-      <p style="float:right; text-align:center">
+    <p style="float:right; text-align:center">
       Wates, <?php echo dateindo($pin->tgl_pinjam) ?> <br>
       Peminjam <br> <br> <br> <br> <br>
       <?php echo $pin->nama_anggota ?> 
-      </p> <br> <br> <br>
+    </p> <br> <br> <br>
 
       <p style="float:left;">Melakukan Pinjaman Uang Koperasi Mulya Abadi Sentosa Kampung Wates, sebesar <?php echo rupiah($pin->besar_pinjaman) ?>, yang akan diangsur selama <?php echo $pin->lama_angsur ?> bulan dan sebanyak <?php echo $pin->jumlah_angsur ?>x (kali).</p> <br>
       

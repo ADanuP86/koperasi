@@ -27,12 +27,14 @@ class C_Jepin extends CI_Controller {
 	public function tambah_jepin() {
 		$this->form_validation->set_rules('nama_pinjaman', 'Nama Pinjaman', 'required|max_length[10]|is_unique[jenis_pinjaman.nama_pinjaman]');
         $this->form_validation->set_rules('besar_pinjaman', 'Besar Pinjaman', 'required|max_length[11]|is_unique[jenis_pinjaman.besar_pinjaman]');
-        if ($this->form_validation->run() == false) {
+
+        if($this->form_validation->run() == false) {
             $this->load->view('templates/header');
 			$this->load->view('templates/sidebar');
 			$this->load->view('Jepin/Tambah_Jepin');
 			$this->load->view('templates/footer');
-        } else {
+        } 
+		else {
 		$id_jepin = $this->input->post('id_jepin');
 		$nama_pinjaman = $this->input->post('nama_pinjaman');
 		$tgl_input = $this->input->post('tgl_input');
@@ -56,10 +58,12 @@ class C_Jepin extends CI_Controller {
         $where = array('id_jepin' => $id_jepin);
         $this->M_Jepin->delete_data($where, 'jenis_pinjaman');
         $error = $this->db->error();
-        if ($error['code'] !=0) {
+
+        if($error['code'] !=0) {
             $this->session->set_flashdata('hapus', 'Data Memiliki Transaksi, Gagal Terhapus.');
             redirect('C_Jepin/jepin');
-        } else {
+        } 
+		else {
             $this->session->set_flashdata('hapus', 'Data Yang Anda Hapus Berhasil.');
             redirect('C_Jepin/jepin');
         }

@@ -146,7 +146,7 @@
         </div>-->
 
         <div class="form-group">
-          <label>Besar Pinjaman</label><!--<font color="red"> *tidak boleh lebih dari jumlah simpanan </font>-->
+          <label>Besar Pinjaman</label>
           <input type="number" name="besar_pinjaman" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
         </div>
 
@@ -164,11 +164,6 @@
           <label>Lama Angsur (bulan)</label>
           <input type="number" name="lama_angsur" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
         </div>
-
-        <!--<div class="form-group">
-          <label>Tanggal Tempo</label>
-          <input type="hidden" name="tgl_tempo" class="form-control" value="<?php date('Y-m-d', strtotime('+$lama_angsur month', strtotime('$tgl_pinjam'))) ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
-        </div>-->
 
         <div class="form-group">
           <label>Nama Anggota</label>
@@ -194,15 +189,6 @@
           <input type="hidden" name="idadmin" class="form-control" id="idadmin" value="<?php echo $admin['id_admin'] ?>">
           <input type="text" name="nama_admin" class="form-control" id="nama_admin" value="<?php echo $admin['nama_admin'] ?>" readonly>
         </div>
-        <!--<div class="form-group">
-          <label>Nama Admin</label>
-          <select name="idadmin" id="idadmin" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
-            <option value="" selected disabled>--Pilih--</option>
-              <?php foreach ($adm as $a) : ?>
-            <option <?= set_select('idadmin', $a['id_admin']) ?> value="<?= $a['id_admin'] ?>"><?= $a['nama_admin'] ?></option>
-              <?php endforeach; ?>
-          </select>
-        </div>-->
 
         <button type="button" class="btn btn-danger" data-dismiss="modal">Kembali</button>
         <button type="submit" class="btn btn-primary">Simpan</button>

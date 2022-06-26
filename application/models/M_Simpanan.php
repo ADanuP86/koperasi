@@ -68,6 +68,11 @@ class M_Simpanan extends CI_Model {
         return $this->db->get('anggota')->result_array();
     }
 
+	public function selectallanggota() {
+		$this->db->order_by('id_anggota', 'DESC');
+        return $this->db->get('anggota')->result_array();
+    }
+
 	public function selectjenis() {
 		$this->db->order_by('id_jesim', 'DESC');
         return $this->db->get('jenis_simpanan')->result_array();
@@ -79,6 +84,17 @@ class M_Simpanan extends CI_Model {
     }
 
 	public function joinceksimpanan($id_anggota) {
+		$this->db->select('*');
+		$this->db->order_by('id_simpanan', 'DESC');
+		$this->db->from('simpanan');
+		$this->db->join('jenis_simpanan as a','a.id_jesim = simpanan.id_jesim','LEFT');
+		$this->db->join('admin as c','c.id_admin = simpanan.id_admin','LEFT');
+		$this->db->join('anggota as b','b.id_anggota = simpanan.id_anggota','LEFT');
+		$this->db->where('b.id_anggota', $id_anggota);
+		return $this->db->get()->result();
+	}
+
+	public function simpanananggota($id_anggota) {
 		$this->db->select('*');
 		$this->db->order_by('id_simpanan', 'DESC');
 		$this->db->from('simpanan');

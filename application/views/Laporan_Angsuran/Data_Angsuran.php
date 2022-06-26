@@ -54,17 +54,17 @@
     
     <button type="submit" name="filter" value="true" class="btn btn-default"><i class="fa fa-file-pdf-o"></i>&nbsp;Cetak PDF</button>   
 
-    <?php
+    <!--<?php
             if(isset($_GET['filter'])) // Jika user mengisi filter tanggal, maka munculkan tombol untuk reset filter
                 echo '<a href="'.base_url('C_Laporan/data_angsuran').'" class="btn btn-default">RESET</a>';
-            ?>
+            ?>-->
 
     </div>
     </div>
     </div>
   </form>
 
-    </div>
+  </div>
   </div>
   </div>
   </section>

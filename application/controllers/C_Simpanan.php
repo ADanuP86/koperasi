@@ -56,7 +56,7 @@ class C_Simpanan extends CI_Controller {
 	public function edit($id_simpanan) {
 		$data['admin'] = $this->db->get_where('admin', ['id_admin' => $this->session->userdata('ses_id')])->row_array();
 		$data['jenis'] = $this->M_Simpanan->selectjenis();
-		$data['anggota'] = $this->M_Simpanan->selectanggota();
+		$data['anggota'] = $this->M_Simpanan->selectallanggota();
 		$data['adm'] = $this->M_Simpanan->selectadmin();
 		$where = array('id_simpanan' => $id_simpanan);
 		$data['koperasi'] = $this->M_Simpanan->edit_data($where, 'simpanan')->result();
@@ -87,6 +87,16 @@ class C_Simpanan extends CI_Controller {
 		$this->M_Simpanan->update_data($where, $data, 'simpanan');
 		$this->session->set_flashdata('ubah', 'Data Yang Anda Ubah Berhasil.');
 		redirect('C_Simpanan/simpanan');
+	}
+
+	public function cek_simpanananggota() {
+		$id_anggota = $this->session->userdata('ses_id');
+		$data['anggota'] = $this->db->get_where('anggota', ['id_anggota' => $this->session->userdata('ses_id')])->row_array();
+		$data['koperasi'] = $this->M_Simpanan->simpanananggota($id_anggota);
+		$this->load->view('templates/header');
+		$this->load->view('templates/sidebar', $data);
+		$this->load->view('Tampilan_Anggota/T_Simpanananggota', $data);
+		$this->load->view('templates/footer');
 	}
 
 }

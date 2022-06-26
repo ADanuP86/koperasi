@@ -69,10 +69,10 @@
 
     <button type="submit" name="filter" value="true" class="btn btn-default"><i class="fa fa-file-pdf-o"></i>&nbsp;Cetak PDF</button>
 
-    <?php
-      //if(isset($_GET['filter'])) // Jika user mengisi filter tanggal, maka munculkan tombol untuk reset filter
-      //echo '<a href="'.base_url('C_Laporan/data_anggota').'" class="btn btn-default">RESET</a>';
-    ?>
+    <!--<?php
+      if(isset($_GET['filter'])) // Jika user mengisi filter tanggal, maka munculkan tombol untuk reset filter
+      echo '<a href="'.base_url('C_Laporan/data_anggota').'" class="btn btn-default">RESET</a>';
+    ?>-->
 
     </div>
     </div>
@@ -148,25 +148,6 @@
   </div>
   </div>
     </div>
-
-  <!--<form method="get" action="<?php echo base_url('C_Laporan/cetak_pekerjaan') ?>">
-    <div class="col-sm-6 col-md-4">
-    <div class="box-body">
-    <div class="form-group">
-      <label>Filter Pekerjaan</label>
-      <select name="pekerjaan" id="pekerjaan" class="form-control">
-      <option value="" selected disabled>Pilih Pekerjaan</option>
-        <?php foreach ($get_pekerjaan as $gp) : ?>
-      <option value="<?php echo $gp->pekerjaan; ?>"><?php echo $gp->pekerjaan; ?></option>
-        <?php endforeach; ?>
-      </select>
-    </div>
-
-    <button type="submit" name="filter" value="true" class="btn btn-default"><i class="fa fa-file-pdf-o"></i>&nbsp;Cetak PDF</button>
-    
-    </div>
-    </div>
-  </form>-->
 
   </div>
   </div>

@@ -139,25 +139,11 @@
           </select>
         </div>
 
-        <!-- <div class="form-group">
-          <label>Besar Simpanan</label>
-          <input type="text" name="besar_simpanan" class="form-control" readonly="">
-        </div> -->
-
         <div class="form-group">
           <label>Nama Admin</label>
           <input type="hidden" name="id_admin" class="form-control" id="id_admin" value="<?php echo $admin['id_admin'] ?>">
           <input type="text" name="nama_admin" class="form-control" id="nama_admin" value="<?php echo $admin['nama_admin'] ?>" readonly>
         </div>
-        <!--<div class="form-group">
-          <label>Nama Admin</label>
-          <select name="id_admin" id="id_admin" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
-            <option value="" selected disabled>--Pilih--</option>
-              <?php foreach ($adm as $a) : ?>
-            <option <?= set_select('id_admin', $a['id_admin']) ?> value="<?= $a['id_admin'] ?>"><?= $a['nama_admin'] ?></option>
-              <?php endforeach; ?>
-          </select>
-        </div>-->
 
         <button type="button" class="btn btn-danger" data-dismiss="modal">Kembali</button>
         <button type="submit" class="btn btn-primary">Simpan</button>

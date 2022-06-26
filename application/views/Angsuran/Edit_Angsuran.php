@@ -53,15 +53,6 @@
         <input type="hidden" name="id_pinjaman" class="form-control" id="id_pinjaman" value="<?php echo $a->id_pinjaman ?>">
         <input type="text" name="tgl_pinjam" class="form-control" id="tgl_pinjam" value="<?php echo dateindo($a->tgl_pinjam) ?> - <?php echo rupiah($total_besarpinjaman) ?> " readonly>
       </div>
-      <!--<div class="form-group">
-        <label>Tanggal Pinjaman - Total Pinjaman</label>
-        <select name="id_pinjaman" id="id_pinjaman" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
-          <option value="" selected disabled>--Pilih--</option>
-            <?php foreach ($pinjaman as $p) : ?>
-          <option <?= $a->id_pinjaman == $p['id_pinjaman'] ? 'selected' : ''; ?> <?= set_select('id_pinjaman', $p['id_pinjaman']) ?> value="<?= $p['id_pinjaman'] ?>"><?= dateindo($p['tgl_pinjam']) ?> - <?= rupiah($p['besar_pinjaman']) ?></option>
-            <?php endforeach; ?>
-        </select>
-      </div>-->
 
       <div class="form-group">
         <label>Angsuran Ke-</label>
@@ -78,30 +69,12 @@
         <input type="hidden" name="idAnggota" class="form-control" id="idAnggota" value="<?php echo $a->idanggota ?>">
         <input type="text" name="nama_anggota" class="form-control" id="nama_anggota" value="<?php echo $a->nama_anggota ?>" readonly>
       </div>
-      <!--<div class="form-group">
-        <label>Nama Anggota</label>
-        <select name="idAnggota" id="idAnggota" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
-          <option value="" selected disabled>--Pilih--</option>
-            <?php foreach ($anggota as $ang) : ?>
-          <option <?= $a->idAnggota == $ang['id_anggota'] ? 'selected' : ''; ?> <?= set_select('id_anggota', $ang['id_anggota']) ?> value="<?= $ang['id_anggota'] ?>"><?= $ang['nama_anggota'] ?></option>
-            <?php endforeach; ?>
-        </select>
-      </div>-->
 
       <div class="form-group">
         <label>Nama Admin</label>
         <input type="hidden" name="idAdmin" class="form-control" id="idAdmin" value="<?php echo $admin['id_admin'] ?>">
         <input type="text" name="nama_admin" class="form-control" id="nama_admin" value="<?php echo $admin['nama_admin'] ?>" readonly>
       </div>
-      <!--<div class="form-group">
-        <label>Nama Admin</label>
-        <select name="idAdmin" id="idAdmin" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
-          <option value="" selected disabled>--Pilih--</option>
-            <?php foreach ($adm as $adm) : ?>
-          <option <?= $a->idAdmin == $adm['id_admin'] ? 'selected' : ''; ?> <?= set_select('id_admin', $adm['id_admin']) ?> value="<?= $adm['id_admin'] ?>"><?= $adm['nama_admin'] ?></option>
-            <?php endforeach; ?>
-        </select>
-      </div>-->
   
     </div>
 
@@ -109,6 +82,7 @@
       <a href="<?= base_url('C_Angsuran/cek_angsur/' . $a->id_pinjaman) ?>" class="btn btn-danger"><i class="fa fa-arrow-left"></i>&nbsp;Kembali</a>
       <button type="submit" class="btn btn-primary">Simpan</button>
     </div>
+    
     </form>
 
     <?php } ?>

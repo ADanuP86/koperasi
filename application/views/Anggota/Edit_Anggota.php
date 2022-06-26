@@ -93,18 +93,6 @@
       <label for="tgl_masuk">Tanggal Masuk</label>
       <input type="date" name="tgl_masuk" class="form-control" id="tgl_masuk" value="<?php echo $kpr->tgl_masuk ?>" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
     </div>
-
-    <!--<div class="form-group">
-      <label>Status</label>
-      <select name="status" id="status" class="form-control" required oninvalid="this.setCustomValidity('Data tidak boleh kosong.')" oninput="setCustomValidity('')">
-        <?php foreach ($koperasi as $st) : ?>
-      <option value="" selected disabled>--Pilih--</option>
-      <option <?= $kpr->status == $st->status ? 'selected' : ''; ?> <?= set_select('status', $st->status) ?> value="<?= $st->status ?>"><?= $st->status ?></option>
-      <option value="Aktif">Aktif</option>
-      <option value="Non-aktif">Non-aktif</option>
-        <?php endforeach; ?>
-      </select>
-    </div>-->
   
     </div>
 
@@ -112,6 +100,7 @@
       <a href="<?= base_url('C_Anggota/anggota') ?>" class="btn btn-danger"><i class="fa fa-arrow-left"></i>&nbsp;Kembali</a>
       <button type="submit" class="btn btn-primary">Simpan</button>
     </div>
+    
     </form>
 
     <?php } ?>

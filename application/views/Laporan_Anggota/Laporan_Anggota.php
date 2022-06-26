@@ -23,6 +23,7 @@
 </style>
 
 </head>
+
 <body>
 
 	<img src="assets/img/Logo LampTeng.png" style="position: absolute; width: 60px; height: auto;">
@@ -47,7 +48,9 @@
 
 	<p align="center" style="font-weight: bold;">LAPORAN DATA ANGGOTA KOPERASI MULYA ABADI SENTOSA</p><br>
 
-	<p align="left">Dicetak pada: <?php echo date("d-m-Y") ?></p><br>
+	<p align="left">Dicetak pada: <?php echo date("d-m-Y") ?></p>
+
+  <!-- <?php echo $label ?><br><br> -->
 
 	 <table class="table table-bordered table-striped">
       <thead>

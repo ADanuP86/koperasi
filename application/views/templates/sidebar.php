@@ -6,15 +6,47 @@
         <div class="pull-left image">
           <img src="<?php echo base_url() ?>assets/img/Logo Koperasi.png" class="img-circle" alt="User Image">
         </div>
+        
+        <?php if ($this->session->userdata('akses') == 'anggota') : ?>
+        <div class="pull-left info">
+          <p><?php echo $anggota['nama_anggota']; ?></p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+        <?php endif; ?>
+
+        <?php if ($this->session->userdata('akses') == 'admin') : ?>
         <div class="pull-left info">
           <p><?php echo $admin['username']; ?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
+        <?php endif; ?>
+
       </div>
       
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU UTAMA</li>
+        <?php if ($this->session->userdata('akses') == 'anggota') : ?>
+        <li <?=$this->uri->segment(2) == 'anggota' || $this->uri->segment(2) == '' ? 'class="active"' : '' ?> class="nav-item">
+          <a href="<?php echo base_url('C_Beranda/anggota') ?>" class="nav-link">
+          <i class="fa fa-user"></i> <span>Informasi Anggota</span>
+          </a>
+        </li>
+        <li class="treeview" <?=$this->uri->segment(2) == '' || $this->uri->segment(2) == '' ? 'class="active"' : '' ?> class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa fa-money"></i> <span>Laporan Transaksi</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url('C_Simpanan/cek_simpanananggota') ?>"><i class="fa fa-circle-o"></i> Simpanan</a></li>
+            <li><a href="<?php echo base_url('C_Pinjaman/cek_pinjamananggota') ?>"><i class="fa fa-circle-o"></i> Pinjaman</a></li>
+          </ul>
+        </li>
+        <?php endif; ?>
+
+        <?php if ($this->session->userdata('akses') == 'admin') : ?>
         <li <?=$this->uri->segment(2) == 'index' || $this->uri->segment(2) == '' ? 'class="active"' : '' ?> class="nav-item">
           <a href="<?php echo base_url('C_Beranda/index') ?>" class="nav-link">
             <i class="fa fa-dashboard"></i> <span>Beranda</span>
@@ -81,6 +113,7 @@
             <i class="fa fa-user-circle"></i> <span>User Admin</span>
           </a>
         </li>
+        <?php endif; ?>
          <li <?=$this->uri->segment(2) == 'logout' || $this->uri->segment(2) == '' ? 'class="active"' : '' ?> class="nav-item">
           <a onclick="javascript: return confirm('Yakin Ingin Keluar?')" href="<?php echo base_url('C_Login/logout') ?>" class="nav-link">
           <i class="fa fa-sign-out"></i> <span>Logout</span>

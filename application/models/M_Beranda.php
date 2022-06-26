@@ -17,7 +17,8 @@ class M_Beranda extends CI_Model {
 
     	if($query->num_rows()>0) {
     		return $query->row()->besar_simpanan;
-    	} else {
+    	} 
+		else {
     		return 0;
     	}
     }
@@ -28,7 +29,8 @@ class M_Beranda extends CI_Model {
 
     	if($query->num_rows()>0) {
     		return $query->row()->besar_pinjaman;
-    	} else {
+    	} 
+		else {
     		return 0;
     	}
     }
@@ -39,7 +41,8 @@ class M_Beranda extends CI_Model {
 
     	if($query->num_rows()>0) {
     		return $query->row()->besar_angsuran;
-    	} else {
+    	} 
+		else {
     		return 0;
     	}
     }

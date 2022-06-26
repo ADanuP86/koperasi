@@ -62,10 +62,8 @@
           echo "<tr><td colspan='7'>Data tidak ada</td></tr>";
         }
         else { 
-        foreach ($koperasi as $kpr) { 
-        
-        $besar_simpanan[] = $kpr->besar_simpanan; $total_besarsimpanan = array_sum($besar_simpanan);
-
+        foreach ($koperasi as $kpr) {
+        $besar_simpanan[] = $kpr->besar_simpanan; $total_besarsimpanan = array_sum($besar_simpanan)
         ?>
 
         <tr>

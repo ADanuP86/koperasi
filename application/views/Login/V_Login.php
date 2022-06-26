@@ -28,7 +28,6 @@
 
   <div class="login-logo">
     <h4><b>SISTEM INFORMASI KOPERASI MULYA ABADI SENTOSA KAMPUNG WATES</b></h4>
-    <!--<a href="<?php echo base_url() ?>C_Login"><b>KOPERASI MULYA ABADI SENTOSA</b></a>-->
   </div>
   <!-- /.login-logo -->
 
@@ -69,7 +68,9 @@
         <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
       </div>
         <!-- /.col -->
+
     </div>
+    
   </form>
 
   </div>

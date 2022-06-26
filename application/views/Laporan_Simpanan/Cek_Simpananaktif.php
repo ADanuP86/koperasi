@@ -40,7 +40,7 @@
     </div>
     
     <div class="box-body table-responsive">
-      <table class="table table-bordered table-striped">
+      <table class="table table-bordered table-striped" id="tabel-data">
         <thead>
         <tr>
           <th class="text-center">No</th>
@@ -62,10 +62,8 @@
           echo "<tr><td colspan='7'>Data tidak ada</td></tr>";
         }
         else { 
-        foreach ($koperasi as $kpr) { 
-        
-        $besar_simpanan[] = $kpr->besar_simpanan; $total_besarsimpanan = array_sum($besar_simpanan);
-
+        foreach ($koperasi as $kpr) {
+        $besar_simpanan[] = $kpr->besar_simpanan; $total_besarsimpanan = array_sum($besar_simpanan)
         ?>
 
         <tr>
@@ -87,10 +85,16 @@
 
       <?php } } ?>
       
-      <tr>
+      <!-- <tr>
       <th class="text-center" colspan="6">Total Simpanan</th>
       <th class="text-center"><?php echo rupiah($total_besarsimpanan) ?></th>
-     </tr>
+     </tr> -->
+
+      <tfoot>
+        <tr>
+        <th colspan="7">Total Simpanan = <?php echo rupiah($total_besarsimpanan) ?></th>
+        </tr>
+      </tfoot>
 
         </tbody>
       </table>

@@ -70,10 +70,9 @@
         
           $besar_pinjaman[] = $kpr->besar_pinjaman; $total_besarpinjaman = $kpr->besar_pinjaman+$kpr->besar_pinjaman/100*$kpr->jasa;
           $besar_angsuran[] = $kpr->besar_angsuran; $total_besarangsuran = array_sum($besar_angsuran)
-        //$besar_pinjaman[] = $kpr->besar_pinjaman; $total_besarpinjaman = array_sum($besar_pinjaman);
         
         ?>
-
+        
         <tr>
           <td class="text-center"><?php echo $no++ ?></td>
           <td class="text-center"><?php echo dateindo($kpr->tgl_pinjam) ?></td>
@@ -98,6 +97,7 @@
         </tr>
 
       <?php } } ?>
+
       <tr>
       <th class="text-center" colspan="9">Total Angsuran</th>
       <th class="text-center"><?php echo rupiah($total_besarangsuran) ?></th>
@@ -113,8 +113,7 @@
                                     
   </div>
 </div>
-    
-  </div>
+</div>
 </section>
 
 </div>

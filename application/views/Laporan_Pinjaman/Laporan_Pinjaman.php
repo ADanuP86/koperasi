@@ -23,6 +23,7 @@
 </style>
 
 </head>
+
 <body>
 
 	<img src="assets/img/Logo LampTeng.png" style="position: absolute; width: 60px; height: auto;">
@@ -71,7 +72,7 @@
         }
         else {
         foreach ($pinjaman as $pin) { 
-        $besar_pinjaman[] = $pin->besar_pinjaman; $total_besarpinjaman = array_sum($besar_pinjaman);
+        $besar_pinjaman[] = $pin->besar_pinjaman; $total_besarpinjaman = array_sum($besar_pinjaman)
         ?>
 
         <tr>
